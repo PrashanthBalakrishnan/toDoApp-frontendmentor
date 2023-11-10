@@ -1,4 +1,4 @@
-import { TodoType } from "../../App";
+import { TodoType } from "../TodoApp";
 import TodoItem from "../todoItem/TodoItem";
 
 interface TodoListProps {

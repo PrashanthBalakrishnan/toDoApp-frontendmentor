@@ -1,5 +1,4 @@
 import TodoApp from "./components/TodoApp";
-import Calculator from "./components/TodoApp";
 
 const App = () => {
   return (
