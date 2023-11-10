@@ -1,0 +1,21 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  min-height: 100vh;
+  background-color: hsl(235, 21%, 11%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 30rem;
+}
