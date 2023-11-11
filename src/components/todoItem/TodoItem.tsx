@@ -41,7 +41,9 @@ const TodoItem: React.FC<TodoListProps> = ({
         <div className={`listItem__checkboxIcon ${completed ? "checked" : ""}`}>
           {completed && <img src={check} alt="checkicon" />}
         </div>
-        <span className="listItem__label">{title}</span>
+        <span className={`listItem__label ${completed ? "checkedItem" : ""}`}>
+          {title}
+        </span>
         {isHovered && (
           <button className="listItem__delete" onClick={() => deleteTodo(id)}>
             <img src={x} />

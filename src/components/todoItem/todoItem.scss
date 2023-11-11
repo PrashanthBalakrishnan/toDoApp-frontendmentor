@@ -1,6 +1,5 @@
 .listItem {
   padding: 25px;
-  border-bottom: 1px solid var(--text-color2);
   width: 100%;
   color: var(--text-color);
 
@@ -17,7 +16,7 @@
   &__checkboxIcon {
     height: 25px;
     width: 25px;
-    border: 1px solid var(--completed-text-color);
+    border: 1px solid var(--border-color);
     border-radius: 50%;
     margin-right: 8px;
     display: flex;
@@ -45,4 +44,9 @@
     margin-left: auto;
     cursor: pointer;
   }
+}
+
+.checkedItem {
+  text-decoration: line-through;
+  color: var(--completed-text-color);
 }

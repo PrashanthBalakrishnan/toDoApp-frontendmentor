@@ -1,0 +1,20 @@
+.filter {
+  &__btns {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__label {
+    cursor: pointer;
+    &:hover {
+      color: var(--hover-color);
+    }
+  }
+  &__radioBtn {
+    display: none;
+  }
+}
+
+.on {
+  color: var(--primary-color);
+}

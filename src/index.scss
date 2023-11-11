@@ -35,7 +35,9 @@ li {
   --completed-text-color: hsl(233, 11%, 84%);
   --text-color: hsl(235, 19%, 35%);
   --text-color2: hsl(236, 9%, 61%);
-  --hover-icon: black;
+  --hover-color: hsl(235, 21%, 11%);
+  --boxshadow: rgba(149, 157, 165, 0.2) 0px 8px 14px;
+  --border-color: hsl(252, 11%, 91%);
 }
 
 body[data-theme="dark"] {
@@ -44,8 +46,9 @@ body[data-theme="dark"] {
   --completed-text-color: hsl(233, 11%, 84%);
   --text-color: hsl(234, 39%, 85%);
   --text-color2: hsl(234, 11%, 52%);
-  --text-hover-color: hsl(236, 33%, 92%);
-  --hover-icon: white;
+  --hover-color: hsl(236, 33%, 92%);
+  --boxshadow: rgba(0, 0, 0, 0.2) 0px 8px 14px;
+  --border-color: hsl(235, 17%, 26%);
 }
 
 body {

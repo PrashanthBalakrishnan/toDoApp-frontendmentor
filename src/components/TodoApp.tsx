@@ -11,6 +11,18 @@ interface TodoAppProps {
 
 const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
   const [todos, setTodos] = useState<TodoType[]>([]);
+  const [filter, setFilter] = useState("all");
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "all") {
+      return true;
+    } else if (filter === "active") {
+      return !todo.completed;
+    } else {
+      return todo.completed;
+    }
+  });
+
   function addTodo(title: string) {
     setTodos((prevTodos) => [
       ...prevTodos,
@@ -39,6 +51,11 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
     });
   }
 
+  function handleClearCompleted() {
+    setTodos((currentTodos) => {
+      return currentTodos.filter((todo) => !todo.completed);
+    });
+  }
   return (
     <main className="main">
       <header className="main__header">
@@ -48,7 +65,14 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
         </button>
       </header>
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} deleteTodo={deleteTodo} toggleTodo={toggleTodo} />
+      <TodoList
+        todos={filteredTodos}
+        deleteTodo={deleteTodo}
+        toggleTodo={toggleTodo}
+        handleClearCompleted={handleClearCompleted}
+        filter={filter}
+        setFilter={setFilter}
+      />
     </main>
   );
 };

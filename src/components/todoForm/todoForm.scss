@@ -1,4 +1,5 @@
 .form {
+  box-shadow: var(--boxshadow);
   &__container {
     position: relative;
   }
@@ -19,7 +20,7 @@
     top: 50%;
     transform: translateY(-50%);
     left: 25px;
-    border: 1px solid var(--app-Background-color);
+    border: 1px solid var(--border-color);
   }
   &__icon {
     position: absolute;
@@ -32,7 +33,7 @@
     fill: var(--text-color);
 
     &:is(:hover, :focus) {
-      fill: var(--hover-icon);
+      fill: var(--hover-color);
     }
   }
 }

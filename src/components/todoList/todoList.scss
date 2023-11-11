@@ -2,4 +2,27 @@
   background-color: var(--app-Background-color);
   margin-top: 25px;
   border-radius: 10px;
+  box-shadow: var(--boxshadow);
+
+  &__item {
+    border-bottom: 1px solid var(--border-color);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    color: var(--text-color2);
+  }
+
+  &__infoButton {
+    &:hover {
+      cursor: pointer;
+      color: var(--hover-color);
+    }
+  }
 }
