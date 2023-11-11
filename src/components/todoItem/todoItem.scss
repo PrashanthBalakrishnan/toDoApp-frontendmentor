@@ -35,6 +35,18 @@
       color: #fff; /* Checked text color */
       border: none;
     }
+    &:hover {
+      border: double 1px transparent;
+      background-image: linear-gradient(white, white),
+        radial-gradient(
+          circle at top left,
+          hsl(192, 100%, 67%),
+          hsl(280, 87%, 65%)
+        );
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      background-size: 20px;
+    }
   }
   &__label {
     user-select: none;
