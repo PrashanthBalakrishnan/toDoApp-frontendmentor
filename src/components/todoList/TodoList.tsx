@@ -1,7 +1,7 @@
 import { TodoType } from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
-import "./TodoList.scss";
+import "./todoList.scss";
 
 interface TodoListProps {
   todos: TodoType[];
