@@ -49,6 +49,12 @@ const TodoItem: React.FC<TodoListProps> = ({
             <img src={x} />
           </button>
         )}
+        <button
+          className="listItem__Mobiledelete"
+          onClick={() => deleteTodo(id)}
+        >
+          <img src={x} />
+        </button>
       </label>
     </li>
   );

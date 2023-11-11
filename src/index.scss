@@ -70,7 +70,7 @@ main {
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 75px;
+  padding: 75px 20px;
   font-size: 18px;
 }
 
@@ -100,5 +100,19 @@ main {
   }
   &__themebtn {
     cursor: pointer;
+  }
+
+  &__filterTodos {
+    display: none;
+    background-color: var(--app-Background-color);
+    margin-top: 25px;
+    border-radius: 10px;
+    box-shadow: var(--boxshadow);
+    padding: 20px 20px;
+    color: var(--text-color2);
+    @media (max-width: 630px) {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

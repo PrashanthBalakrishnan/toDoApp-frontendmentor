@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoForm from "./todoForm/TodoForm";
 import TodoList from "./todoList/TodoList";
 import sun from "../assets/icon-sun.svg";
 import moon from "../assets/icon-moon.svg";
 import { TodoType } from "../utils/types";
+import TodoFilter from "./todoFilter/TodoFilter";
 interface TodoAppProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
 }
 
 const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
-  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [todos, setTodos] = useState<TodoType[]>(() => {
+    const localValue = localStorage.getItem("todo-items");
+    if (localValue === null) return [];
+    return JSON.parse(localValue);
+  });
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    localStorage.setItem("todo-items", JSON.stringify(todos));
+  }, [todos]);
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === "all") {
@@ -73,6 +82,9 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
         filter={filter}
         setFilter={setFilter}
       />
+      <div className="main__filterTodos">
+        <TodoFilter filter={filter} setFilter={setFilter} />
+      </div>
     </main>
   );
 };

@@ -37,7 +37,9 @@ const TodoList: React.FC<TodoListProps> = ({
             </div>
           )}
         </div>
-        <TodoFilter filter={filter} setFilter={setFilter} />
+        <div className="list__filterBtns">
+          <TodoFilter filter={filter} setFilter={setFilter} />
+        </div>
         <button className="list__infoButton" onClick={handleClearCompleted}>
           clear completed
         </button>
