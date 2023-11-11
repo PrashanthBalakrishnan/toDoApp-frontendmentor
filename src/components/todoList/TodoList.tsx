@@ -1,5 +1,6 @@
-import { TodoType } from "../TodoApp";
+import { TodoType } from "../../utils/types";
 import TodoItem from "../todoItem/TodoItem";
+import "./TodoList.scss";
 
 interface TodoListProps {
   todos: TodoType[];
@@ -15,7 +16,9 @@ const TodoList: React.FC<TodoListProps> = ({
   return (
     <ul className="list">
       {todos.map((todo: TodoType) => (
-        <TodoItem {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+        <div key={todo.id}>
+          <TodoItem {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+        </div>
       ))}
     </ul>
   );

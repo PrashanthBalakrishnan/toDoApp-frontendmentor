@@ -1,0 +1,38 @@
+.form {
+  &__container {
+    position: relative;
+  }
+
+  &__input {
+    background-color: var(--app-Background-color);
+    padding: 23px 70px;
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+    color: var(--text-color);
+  }
+  &__circle {
+    position: absolute;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 25px;
+    border: 1px solid var(--app-Background-color);
+  }
+  &__icon {
+    position: absolute;
+    top: 50%;
+    height: 25px;
+    width: 25px;
+    transform: translateY(-50%);
+    right: 25px;
+    cursor: pointer;
+    fill: var(--text-color);
+
+    &:is(:hover, :focus) {
+      fill: var(--hover-icon);
+    }
+  }
+}

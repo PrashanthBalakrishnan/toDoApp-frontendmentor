@@ -1,21 +1,101 @@
-html {
-  font-size: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+*,
+*::after,
+*::before {
+  border: 0;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
+input,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+}
+
+li {
+  list-style: none;
+}
+
+// COLORS
+
+:root {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+  --primary-color: hsl(220, 98%, 61%);
+  --check-bgcolor: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+
+  --background-color: hsl(0, 0%, 98%);
+  --app-Background-color: hsl(0, 0%, 100%);
+  --completed-text-color: hsl(233, 11%, 84%);
+  --text-color: hsl(235, 19%, 35%);
+  --text-color2: hsl(236, 9%, 61%);
+  --hover-icon: black;
+}
+
+body[data-theme="dark"] {
+  --background-color: hsl(235, 21%, 11%);
+  --app-Background-color: hsl(235, 24%, 19%);
+  --completed-text-color: hsl(233, 11%, 84%);
+  --text-color: hsl(234, 39%, 85%);
+  --text-color2: hsl(234, 11%, 52%);
+  --text-hover-color: hsl(236, 33%, 92%);
+  --hover-icon: white;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  background-color: var(--background-color);
+}
+
+main {
+  max-width: 540px;
+  width: 100%;
 }
 
 .app {
-  min-height: 100vh;
-  background-color: hsl(235, 21%, 11%);
-  color: white;
   display: flex;
-  justify-content: center;
-  margin-top: 30rem;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  background-image: url("./assets/bg-desktop-light.jpg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 75px;
+  font-size: 18px;
+}
+
+.app-Dark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  background-image: url("./assets/bg-desktop-dark.jpg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 75px;
+  font-size: 18px;
+}
+
+.main {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 50px;
+  }
+  &__logo {
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+  }
+  &__themebtn {
+    cursor: pointer;
+  }
 }
