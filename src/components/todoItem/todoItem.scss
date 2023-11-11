@@ -37,7 +37,10 @@
     }
     &:hover {
       border: double 1px transparent;
-      background-image: linear-gradient(white, white),
+      background-image: linear-gradient(
+          var(--app-Background-color),
+          var(--app-Background-color)
+        ),
         radial-gradient(
           circle at top left,
           hsl(192, 100%, 67%),
