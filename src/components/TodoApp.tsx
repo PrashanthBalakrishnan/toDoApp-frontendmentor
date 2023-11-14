@@ -5,6 +5,7 @@ import sun from "../assets/icon-sun.svg";
 import moon from "../assets/icon-moon.svg";
 import { TodoType } from "../utils/types";
 import TodoFilter from "./todoFilter/TodoFilter";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 interface TodoAppProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
@@ -60,6 +61,27 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
     });
   }
 
+  const handleDragDrop = (results: DropResult) => {
+    const { source, destination, type } = results;
+    if (!destination) return;
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    )
+      return;
+
+    if (type === "group") {
+      const reorderedStores = [...todos];
+      const sourceIndex = source.index;
+      const destinationIndex = destination.index;
+
+      const [removedStore] = reorderedStores.splice(sourceIndex, 1);
+      reorderedStores.splice(destinationIndex, 0, removedStore);
+
+      return setTodos(reorderedStores);
+    }
+  };
+
   function handleClearCompleted() {
     setTodos((currentTodos) => {
       return currentTodos.filter((todo) => !todo.completed);
@@ -74,14 +96,16 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
         </button>
       </header>
       <TodoForm addTodo={addTodo} />
-      <TodoList
-        todos={filteredTodos}
-        deleteTodo={deleteTodo}
-        toggleTodo={toggleTodo}
-        handleClearCompleted={handleClearCompleted}
-        filter={filter}
-        setFilter={setFilter}
-      />
+      <DragDropContext onDragEnd={handleDragDrop}>
+        <TodoList
+          todos={filteredTodos}
+          deleteTodo={deleteTodo}
+          toggleTodo={toggleTodo}
+          handleClearCompleted={handleClearCompleted}
+          filter={filter}
+          setFilter={setFilter}
+        />
+      </DragDropContext>
       <div className="main__filterTodos">
         <TodoFilter filter={filter} setFilter={setFilter} />
       </div>
