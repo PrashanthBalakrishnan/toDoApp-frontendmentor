@@ -1,3 +1,4 @@
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import { TodoType } from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
@@ -21,30 +22,52 @@ const TodoList: React.FC<TodoListProps> = ({
   setFilter,
 }) => {
   return (
-    <ul className="list">
-      {todos.map((todo: TodoType) => (
-        <div className="list__item" key={todo.id}>
-          <TodoItem {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-        </div>
-      ))}
-      <div className="list__info">
-        <div>
-          {todos.length === 0 ? (
-            "No items"
-          ) : (
+    <Droppable droppableId="ROOT" type="group">
+      {(provided) => (
+        <ul
+          className="list"
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+        >
+          {todos.map((todo: TodoType, index) => (
+            <Draggable key={todo.id} draggableId={todo.id} index={index}>
+              {(provided) => (
+                <div
+                  className="list__item"
+                  key={todo.id}
+                  {...provided.dragHandleProps}
+                  {...provided.draggableProps}
+                  ref={provided.innerRef}
+                >
+                  <TodoItem
+                    {...todo}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                  />
+                </div>
+              )}
+            </Draggable>
+          ))}
+          <div className="list__info">
             <div>
-              {todos.length} {todos.length === 1 ? "item" : "items"} left
+              {todos.length === 0 ? (
+                "No items"
+              ) : (
+                <div>
+                  {todos.length} {todos.length === 1 ? "item" : "items"} left
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div className="list__filterBtns">
-          <TodoFilter filter={filter} setFilter={setFilter} />
-        </div>
-        <button className="list__infoButton" onClick={handleClearCompleted}>
-          clear completed
-        </button>
-      </div>
-    </ul>
+            <div className="list__filterBtns">
+              <TodoFilter filter={filter} setFilter={setFilter} />
+            </div>
+            <button className="list__infoButton" onClick={handleClearCompleted}>
+              clear completed
+            </button>
+          </div>
+        </ul>
+      )}
+    </Droppable>
   );
 };
 export default TodoList;
