@@ -115,4 +115,10 @@ main {
       justify-content: center;
     }
   }
+  &__dragmessage {
+    margin-top: 50px;
+    text-align: center;
+    color: var(--text-color2);
+    font-size: 0.8rem;
+  }
 }

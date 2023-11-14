@@ -48,6 +48,7 @@ const TodoList: React.FC<TodoListProps> = ({
               )}
             </Draggable>
           ))}
+          {provided.placeholder}
           <div className="list__info">
             <div>
               {todos.length === 0 ? (

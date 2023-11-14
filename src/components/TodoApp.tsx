@@ -109,6 +109,7 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
       <div className="main__filterTodos">
         <TodoFilter filter={filter} setFilter={setFilter} />
       </div>
+      <p className="main__dragmessage">Drag and drop to reorder list</p>
     </main>
   );
 };
