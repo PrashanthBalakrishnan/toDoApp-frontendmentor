@@ -25,7 +25,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
           onChange={(e) => setNewItem(e.target.value)}
         />
         <div className="form__circle" />
-        <button type="submit">
+        <button type="submit" aria-label="Submit">
           <svg
             width="800px"
             height="800px"

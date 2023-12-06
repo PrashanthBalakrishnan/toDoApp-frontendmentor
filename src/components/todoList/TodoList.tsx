@@ -24,7 +24,7 @@ const TodoList: React.FC<TodoListProps> = ({
   return (
     <Droppable droppableId="ROOT" type="group">
       {(provided) => (
-        <ul
+        <div
           className="list"
           {...provided.droppableProps}
           ref={provided.innerRef}
@@ -66,7 +66,7 @@ const TodoList: React.FC<TodoListProps> = ({
               clear completed
             </button>
           </div>
-        </ul>
+        </div>
       )}
     </Droppable>
   );

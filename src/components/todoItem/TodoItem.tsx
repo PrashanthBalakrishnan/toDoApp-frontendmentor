@@ -26,37 +26,41 @@ const TodoItem: React.FC<TodoListProps> = ({
     setIsHovered(false);
   };
   return (
-    <li
-      className="listItem"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <label className="listItem__checkbox">
-        <input
-          type="checkbox"
-          checked={completed}
-          onChange={(e) => toggleTodo(id, e.target.checked)}
-          className="listItem__hiddenCheckbox"
-        />
-        <div className={`listItem__checkboxIcon ${completed ? "checked" : ""}`}>
-          {completed && <img src={check} alt="checkicon" />}
-        </div>
-        <span className={`listItem__label ${completed ? "checkedItem" : ""}`}>
-          {title}
-        </span>
-        {isHovered && (
-          <button className="listItem__delete" onClick={() => deleteTodo(id)}>
+    <ul>
+      <li
+        className="listItem"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <label className="listItem__checkbox">
+          <input
+            type="checkbox"
+            checked={completed}
+            onChange={(e) => toggleTodo(id, e.target.checked)}
+            className="listItem__hiddenCheckbox"
+          />
+          <div
+            className={`listItem__checkboxIcon ${completed ? "checked" : ""}`}
+          >
+            {completed && <img src={check} alt="checkicon" />}
+          </div>
+          <span className={`listItem__label ${completed ? "checkedItem" : ""}`}>
+            {title}
+          </span>
+          {isHovered && (
+            <button className="listItem__delete" onClick={() => deleteTodo(id)}>
+              <img src={x} />
+            </button>
+          )}
+          <button
+            className="listItem__Mobiledelete"
+            onClick={() => deleteTodo(id)}
+          >
             <img src={x} />
           </button>
-        )}
-        <button
-          className="listItem__Mobiledelete"
-          onClick={() => deleteTodo(id)}
-        >
-          <img src={x} />
-        </button>
-      </label>
-    </li>
+        </label>
+      </li>
+    </ul>
   );
 };
 export default TodoItem;

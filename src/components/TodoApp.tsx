@@ -91,8 +91,16 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
     <main className="main">
       <header className="main__header">
         <h1 className="main__logo">todo</h1>
-        <button onClick={toggleDarkMode} className="main__themebtn">
-          {isDarkMode ? <img src={sun} /> : <img src={moon} />}
+        <button
+          onClick={toggleDarkMode}
+          className="main__themebtn"
+          aria-label="Theme switcher"
+        >
+          {isDarkMode ? (
+            <img src={sun} alt="Sun icon" />
+          ) : (
+            <img src={moon} alt="Moon icon" />
+          )}
         </button>
       </header>
       <TodoForm addTodo={addTodo} />
