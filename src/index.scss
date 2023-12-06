@@ -27,25 +27,26 @@ li {
 :root {
   scroll-behavior: smooth;
   scroll-padding-top: 2rem;
-  --primary-color: hsl(220, 98%, 61%);
+  --primary-color: hsl(220, 100%, 50%);
   --check-bgcolor: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
   --background-color: hsl(0, 0%, 98%);
   --app-Background-color: hsl(0, 0%, 100%);
-  --completed-text-color: hsl(233, 11%, 84%);
+  --completed-text-color: hsl(0, 0%, 6%);
   --text-color: hsl(235, 19%, 35%);
-  --text-color2: hsl(236, 9%, 61%);
+  --text-color2: hsl(0, 0%, 12%);
   --hover-color: hsl(235, 21%, 11%);
   --boxshadow: rgba(149, 157, 165, 0.2) 0px 8px 14px;
   --border-color: hsl(252, 11%, 91%);
 }
 
 body[data-theme="dark"] {
+  --primary-color: hsl(219, 100%, 79%);
   --background-color: hsl(235, 21%, 11%);
   --app-Background-color: hsl(235, 24%, 19%);
   --completed-text-color: hsl(233, 11%, 84%);
-  --text-color: hsl(234, 39%, 85%);
-  --text-color2: hsl(234, 11%, 52%);
+  --text-color: hsl(0, 0%, 100%);
+  --text-color2: hsl(0, 0%, 100%);
   --hover-color: hsl(236, 33%, 92%);
   --boxshadow: rgba(0, 0, 0, 0.2) 0px 8px 14px;
   --border-color: hsl(235, 17%, 26%);
