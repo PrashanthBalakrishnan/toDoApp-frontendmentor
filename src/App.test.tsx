@@ -2,9 +2,9 @@
 
 import { render } from "../test/utilities";
 import App from "./App";
-import { axe, toHaveNoViolations } from "jest-axe";
+// import { axe, toHaveNoViolations } from "jest-axe";
 
-expect.extend(toHaveNoViolations);
+// expect.extend(toHaveNoViolations);
 
 describe("App", () => {
   it("should render app", () => {
