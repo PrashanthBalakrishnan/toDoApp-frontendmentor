@@ -27,7 +27,7 @@ li {
 :root {
   scroll-behavior: smooth;
   scroll-padding-top: 2rem;
-  --primary-color: hsl(220, 100%, 51%);
+  --primary-color: hsl(220, 100%, 50%);
   --check-bgcolor: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
   --background-color: hsl(0, 0%, 98%);
@@ -41,11 +41,12 @@ li {
 }
 
 body[data-theme="dark"] {
+  --primary-color: hsl(219, 100%, 79%);
   --background-color: hsl(235, 21%, 11%);
   --app-Background-color: hsl(235, 24%, 19%);
   --completed-text-color: hsl(233, 11%, 84%);
-  --text-color: hsl(234, 39%, 85%);
-  --text-color2: hsl(240, 4%, 86%);
+  --text-color: hsl(0, 0%, 100%);
+  --text-color2: hsl(0, 0%, 100%);
   --hover-color: hsl(236, 33%, 92%);
   --boxshadow: rgba(0, 0, 0, 0.2) 0px 8px 14px;
   --border-color: hsl(235, 17%, 26%);
