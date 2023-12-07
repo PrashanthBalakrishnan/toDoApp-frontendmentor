@@ -58,6 +58,7 @@
   &__delete {
     margin-left: auto;
     cursor: pointer;
+    font-size: 12px;
     @media (max-width: 1024px) {
       display: none;
     }

@@ -10,7 +10,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (newItem === "") return;
     addTodo(newItem);
     setNewItem("");
   };
@@ -25,7 +24,12 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
           onChange={(e) => setNewItem(e.target.value)}
         />
         <div className="form__circle" />
-        <button type="submit" aria-label="Submit">
+        <button
+          type="submit"
+          aria-label="submit"
+          data-testid="submit-button"
+          disabled={!newItem.trim()}
+        >
           <svg
             width="800px"
             height="800px"

@@ -1,7 +1,6 @@
 import x from "../../assets/icon-cross.svg";
 import check from "../../assets/icon-check.svg";
 import "./todoItem.scss";
-import { useState } from "react";
 interface TodoListProps {
   completed: boolean;
   id: string;
@@ -17,21 +16,9 @@ const TodoItem: React.FC<TodoListProps> = ({
   toggleTodo,
   deleteTodo,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
   return (
-    <ul>
-      <li
-        className="listItem"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+    <div>
+      <div className="listItem">
         <label className="listItem__checkbox">
           <input
             type="checkbox"
@@ -47,20 +34,18 @@ const TodoItem: React.FC<TodoListProps> = ({
           <span className={`listItem__label ${completed ? "checkedItem" : ""}`}>
             {title}
           </span>
-          {isHovered && (
-            <button className="listItem__delete" onClick={() => deleteTodo(id)}>
-              <img src={x} />
-            </button>
-          )}
+
           <button
-            className="listItem__Mobiledelete"
+            className="listItem__delete"
+            aria-label="delete todo"
+            data-testid="delete-button"
             onClick={() => deleteTodo(id)}
           >
             <img src={x} />
           </button>
         </label>
-      </li>
-    </ul>
+      </div>
+    </div>
   );
 };
 export default TodoItem;

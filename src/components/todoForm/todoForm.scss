@@ -37,3 +37,12 @@
     }
   }
 }
+
+button {
+  &:disabled {
+    .form__icon {
+      fill: var(--disable-color);
+      cursor: not-allowed;
+    }
+  }
+}
