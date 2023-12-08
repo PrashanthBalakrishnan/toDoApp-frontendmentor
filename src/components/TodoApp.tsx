@@ -50,6 +50,7 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
       return currentTodos.filter((todo) => !todo.completed);
     });
   }
+  console.log(todos);
   return (
     <main className="main">
       <header className="main__header">
