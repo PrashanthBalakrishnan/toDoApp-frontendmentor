@@ -99,7 +99,11 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
         >
           <MdOutlineModeEdit />
         </button>
-        <button onClick={() => deleteTodo(todo.id)} aria-label="delete todo">
+        <button
+          onClick={() => deleteTodo(todo.id)}
+          data-testid="delete-button"
+          aria-label="delete todo"
+        >
           <HiOutlineXMark className="listItem__icon" />
         </button>
       </div>
