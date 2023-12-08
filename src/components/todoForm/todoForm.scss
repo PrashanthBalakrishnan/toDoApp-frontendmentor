@@ -22,26 +22,24 @@
     left: 25px;
     border: 1px solid var(--border-color);
   }
-  &__icon {
+  &__button {
     position: absolute;
+    z-index: 99;
     top: 50%;
     height: 25px;
     width: 25px;
     transform: translateY(-50%);
     right: 25px;
+    transition: all 0.3s ease-in-out;
+    color: var(--text-color);
     cursor: pointer;
-    fill: var(--text-color);
-
-    &:is(:hover, :focus) {
-      fill: var(--hover-color);
+    &:is(:hover, :focus, :active) {
+      color: var(--primary-color);
+      scale: 1.2;
     }
-  }
-}
 
-button {
-  &:disabled {
-    .form__icon {
-      fill: var(--disable-color);
+    &:disabled {
+      color: var(--disable-color);
       cursor: not-allowed;
     }
   }
