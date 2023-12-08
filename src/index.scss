@@ -29,6 +29,7 @@ li {
   scroll-padding-top: 2rem;
   --primary-color: hsl(220, 100%, 50%);
   --check-bgcolor: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --disable-color: hsla(0, 0%, 0%, 0.12);
 
   --background-color: hsl(0, 0%, 98%);
   --app-Background-color: hsl(0, 0%, 100%);
@@ -42,6 +43,7 @@ li {
 
 body[data-theme="dark"] {
   --primary-color: hsl(219, 100%, 79%);
+  --disable-color: hsla(233, 11%, 84%, 0.12);
   --background-color: hsl(235, 21%, 11%);
   --app-Background-color: hsl(235, 24%, 19%);
   --completed-text-color: hsl(233, 11%, 84%);
@@ -60,6 +62,17 @@ body {
 main {
   max-width: 540px;
   width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .app {

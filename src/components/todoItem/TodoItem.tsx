@@ -1,66 +1,113 @@
-import x from "../../assets/icon-cross.svg";
-import check from "../../assets/icon-check.svg";
+import { HiOutlineXMark } from "react-icons/hi2";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
+
+import { useRef, useEffect, useState } from "react";
+
 import "./todoItem.scss";
-import { useState } from "react";
+import { TodoType } from "@/src/utils/types";
+
 interface TodoListProps {
-  completed: boolean;
-  id: string;
-  title: string;
-  toggleTodo: (id: string, completed: boolean) => void;
-  deleteTodo: (id: string) => void;
+  todo: TodoType;
+  todos: TodoType[];
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
 
-const TodoItem: React.FC<TodoListProps> = ({
-  completed,
-  id,
-  title,
-  toggleTodo,
-  deleteTodo,
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editTodo, setEditTodo] = useState<string>(todo.title);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function deleteTodo(id: string) {
+    return setTodos((currentTodos) => {
+      return currentTodos.filter((todo) => todo.id !== id);
+    });
+  }
+
+  function toggleTodo(id: string, completed: boolean) {
+    setTodos((currentTodos) => {
+      return currentTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed };
+        }
+        return todo;
+      });
+    });
+  }
+
+  const handleEdit = (e: React.FormEvent, id: string) => {
+    e.preventDefault();
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, title: editTodo } : todo
+      )
+    );
+    setEdit(false);
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  useEffect(() => {
+    if (edit) {
+      inputRef.current?.focus();
+    }
+  }, [edit]);
+
   return (
-    <ul>
-      <li
-        className="listItem"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <label className="listItem__checkbox">
+    <div className="listItem">
+      <input
+        className="listItem__input"
+        type="checkbox"
+        id={todo.id}
+        onChange={(e) => toggleTodo(todo.id, e.target.checked)}
+        checked={todo.completed}
+      />
+
+      {edit ? (
+        <form
+          className="listItem__form"
+          onSubmit={(e) => handleEdit(e, todo.id)}
+        >
           <input
-            type="checkbox"
-            checked={completed}
-            onChange={(e) => toggleTodo(id, e.target.checked)}
-            className="listItem__hiddenCheckbox"
+            ref={inputRef}
+            value={editTodo}
+            onChange={(e) => setEditTodo(e.target.value)}
+            className="listItem__inputEdit"
           />
-          <div
-            className={`listItem__checkboxIcon ${completed ? "checked" : ""}`}
-          >
-            {completed && <img src={check} alt="checkicon" />}
-          </div>
-          <span className={`listItem__label ${completed ? "checkedItem" : ""}`}>
-            {title}
-          </span>
-          {isHovered && (
-            <button className="listItem__delete" onClick={() => deleteTodo(id)}>
-              <img src={x} />
-            </button>
-          )}
-          <button
-            className="listItem__Mobiledelete"
-            onClick={() => deleteTodo(id)}
-          >
-            <img src={x} />
+          <button className="listItem__icon" aria-label="submit edited todo">
+            <FaCheck />
           </button>
+        </form>
+      ) : todo.completed ? (
+        <label className="listItem__label" htmlFor={todo.id}>
+          {todo.title}
         </label>
-      </li>
-    </ul>
+      ) : (
+        <label className="listItem__label" htmlFor={todo.id}>
+          {todo.title}
+        </label>
+      )}
+
+      <div className="listItem__actions">
+        <button
+          className="listItem__icon"
+          aria-label="edit a todo"
+          onClick={() => {
+            if (!edit && !todo.completed) {
+              setEdit(!edit);
+            }
+          }}
+        >
+          <MdOutlineModeEdit />
+        </button>
+        <button
+          onClick={() => deleteTodo(todo.id)}
+          data-testid="delete-button"
+          aria-label="delete todo"
+        >
+          <HiOutlineXMark className="listItem__icon" />
+        </button>
+      </div>
+    </div>
   );
 };
 export default TodoItem;
