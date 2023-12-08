@@ -46,16 +46,43 @@ describe("App", () => {
     expect(document.body).toHaveTextContent("Go to the gym");
   });
 
-  test("user able to create toggle a todo", async () => {
+  test("user able to toggle complete", async () => {
     const { user } = render(<App />);
-    const input = screen.getByRole("textbox");
-    const SubmitButton = screen.getByTestId("submit-button");
     const checkbox = screen.getByRole("checkbox");
-    await user.type(input, "Go to the gym");
-    await user.click(SubmitButton);
 
     await user.click(checkbox);
 
     expect(checkbox).toBeChecked();
+  });
+
+  test("user able to see completed todo", async () => {
+    const { user } = render(<App />);
+    const completedFilter = screen.getByRole("radio", { name: /completed/i });
+
+    await user.click(completedFilter);
+    expect(document.body).toHaveTextContent("Go to the gym");
+  });
+
+  test("user able to see active todo", async () => {
+    const { user } = render(<App />);
+    const activeFilter = screen.getByRole("radio", { name: /active/i });
+
+    await user.click(activeFilter);
+    expect(document.body).not.toHaveTextContent("Go to the gym");
+  });
+
+  test("user able to see all todo", async () => {
+    const { user } = render(<App />);
+    const activeFilter = screen.getByRole("radio", { name: /all/i });
+
+    await user.click(activeFilter);
+    expect(document.body).toHaveTextContent("Go to the gym");
+  });
+
+  test("user able to create todo and delete", async () => {
+    const { user } = render(<App />);
+    const deleteButton = screen.getByTestId("delete-button");
+    await user.click(deleteButton);
+    expect(document.body).not.toHaveTextContent("Go to the gym");
   });
 });

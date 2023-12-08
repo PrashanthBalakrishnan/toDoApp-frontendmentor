@@ -39,6 +39,7 @@ const TodoFilter: React.FC<TodoFilterProps> = ({ filter, setFilter }) => {
             value="completed"
             type="radio"
             className="filter__radioBtn"
+            data-testid="completed"
             checked={filter === "completed"}
             onChange={() => setFilter("completed")}
           />

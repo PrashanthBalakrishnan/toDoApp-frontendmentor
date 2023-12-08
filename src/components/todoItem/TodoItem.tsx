@@ -67,13 +67,22 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
           className="listItem__form"
           onSubmit={(e) => handleEdit(e, todo.id)}
         >
+          <label htmlFor={todo.id} className="sr-only">
+            Title:
+          </label>
           <input
+            id={todo.id}
             ref={inputRef}
             value={editTodo}
+            data-testid="edit-input"
             onChange={(e) => setEditTodo(e.target.value)}
             className="listItem__inputEdit"
           />
-          <button className="listItem__icon" aria-label="submit edited todo">
+          <button
+            className="listItem__icon"
+            data-testid="save-button"
+            aria-label="save edited todo"
+          >
             <FaCheck />
           </button>
         </form>
@@ -89,6 +98,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
 
       <div className="listItem__actions">
         <button
+          data-testid="edit-button"
           className="listItem__icon"
           aria-label="edit a todo"
           onClick={() => {

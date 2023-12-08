@@ -24,9 +24,4 @@
       color: var(--hover-color);
     }
   }
-  &__filterBtns {
-    @media (max-width: 630px) {
-      display: none;
-    }
-  }
 }

@@ -116,19 +116,6 @@ main {
     cursor: pointer;
   }
 
-  &__filterTodos {
-    display: none;
-    background-color: var(--app-Background-color);
-    margin-top: 25px;
-    border-radius: 10px;
-    box-shadow: var(--boxshadow);
-    padding: 20px 20px;
-    color: var(--text-color2);
-    @media (max-width: 630px) {
-      display: flex;
-      justify-content: center;
-    }
-  }
   &__dragmessage {
     margin-top: 50px;
     text-align: center;
