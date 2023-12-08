@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import TodoForm from "./todoForm/TodoForm";
 import TodoList from "./todoList/TodoList";
-import sun from "../assets/icon-sun.svg";
-import moon from "../assets/icon-moon.svg";
+import { FaMoon } from "react-icons/fa";
+import { LuSun } from "react-icons/lu";
+
 import { TodoType } from "../utils/types";
 import TodoFilter from "./todoFilter/TodoFilter";
 interface TodoAppProps {
@@ -58,11 +59,7 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
           className="main__themebtn"
           aria-label="Theme switcher"
         >
-          {isDarkMode ? (
-            <img src={sun} alt="Sun icon" />
-          ) : (
-            <img src={moon} alt="Moon icon" />
-          )}
+          {isDarkMode ? <LuSun /> : <FaMoon />}
         </button>
       </header>
       <TodoForm addTodo={addTodo} />
