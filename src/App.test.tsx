@@ -46,24 +46,16 @@ describe("App", () => {
     expect(document.body).toHaveTextContent("Go to the gym");
   });
 
-  test("user able to create delete and check", async () => {
+  test("user able to create toggle a todo", async () => {
     const { user } = render(<App />);
     const input = screen.getByRole("textbox");
     const SubmitButton = screen.getByTestId("submit-button");
     const checkbox = screen.getByRole("checkbox");
-    const deleteButton = screen.getByTestId("delete-button");
     await user.type(input, "Go to the gym");
     await user.click(SubmitButton);
 
     await user.click(checkbox);
 
     expect(checkbox).toBeChecked();
-
-    await user.click(deleteButton);
-  });
-
-  test("Goto gym shouldnt be in the document", () => {
-    render(<App />);
-    screen.debug(document.body);
   });
 });

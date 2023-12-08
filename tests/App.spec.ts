@@ -1,9 +1,17 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+
+test("Ability to add and delete todo", async ({ page }) => {
+  await page.goto("/");
+  await page.getByPlaceholder("Create a new todo...").click();
+  await page.getByPlaceholder("Create a new todo...").fill("go to gym");
+  await page.getByTestId("submit-button").click();
+  await page.getByTestId("delete-button").click();
+});
 
 test("User should be able to add a todo then edit it then toggle complete and clear complete", async ({
   page,
 }) => {
-  await page.goto("http://localhost:5173/");
+  await page.goto("/");
   await page.getByPlaceholder("Create a new todo...").click();
   await page.getByPlaceholder("Create a new todo...").fill("addingg to do");
   await page.getByPlaceholder("Create a new todo...").press("Enter");
