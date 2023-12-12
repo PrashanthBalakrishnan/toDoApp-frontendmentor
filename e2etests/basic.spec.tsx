@@ -12,7 +12,7 @@ test("Adding/editing/deleting a todo", async ({ page }) => {
   await page.getByTestId("delete-button").click();
 });
 
-test.only("Checking if filters work", async ({ page }) => {
+test("Checking if filters work", async ({ page }) => {
   await page.goto("/");
   await page.getByPlaceholder("Create a new todo...").click();
   await page.getByPlaceholder("Create a new todo...").fill("Go to gym");
