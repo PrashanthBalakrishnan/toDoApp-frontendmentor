@@ -41,7 +41,7 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
     <DragDropContext onDragEnd={handleDragEnd}>
       <main className="main">
         <header className="main__header">
-          <h1 className="main__logo">todo</h1>
+          <h1 className="main__logo">Taskify</h1>
           <button
             onClick={toggleDarkMode}
             className="main__themebtn"

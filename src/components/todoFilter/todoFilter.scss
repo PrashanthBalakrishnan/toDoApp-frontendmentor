@@ -1,32 +1,10 @@
 .filter {
-  @media (max-width: 630px) {
-    position: absolute;
-    top: 14%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--app-Background-color);
-    border-radius: 10px;
-    box-shadow: var(--boxshadow);
-    padding: 10px 20px;
-    color: var(--text-color2);
-    font-size: 0.75rem;
-  }
-  &__btns {
-    display: flex;
-    gap: 10px;
-  }
-
-  &__label {
-    cursor: pointer;
-    &:hover {
-      color: var(--hover-color);
-    }
-  }
-  &__radioBtn {
-    display: none;
+  margin-right: 10px;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
   }
 }
-
-.on {
+.selected {
   color: var(--primary-color);
 }

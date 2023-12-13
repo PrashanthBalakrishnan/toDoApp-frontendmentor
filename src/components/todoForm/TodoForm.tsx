@@ -32,7 +32,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
         <input
           className="form__input"
           type="text"
-          placeholder="Create a new todo..."
+          placeholder="Create a new task..."
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
         />

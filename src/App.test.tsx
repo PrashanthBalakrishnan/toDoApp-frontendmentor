@@ -20,10 +20,9 @@ describe("App", () => {
     expect(results).toHaveNoViolations();
   });
 
-  it("should have a title of TODO", () => {
+  it("should have a title of Taskify", () => {
     render(<App />);
-    const title = screen.getByRole("heading", { name: /todo/i });
-    expect(title).toHaveTextContent(/todo/i);
+    screen.getByRole("heading", { name: /taskify/i });
   });
 
   test("button should be disabled if the input is empty", () => {
@@ -34,7 +33,7 @@ describe("App", () => {
     expect(SubmitButton).toBeDisabled();
   });
 
-  test("User able to add a todo", async () => {
+  test("User able to add a task", async () => {
     const { user } = render(<App />);
     const input = screen.getByRole("textbox");
     const SubmitButton = screen.getByTestId("submit-button");
@@ -55,31 +54,33 @@ describe("App", () => {
     expect(checkbox).toBeChecked();
   });
 
-  test("user able to see completed todo", async () => {
+  test("user able to see completed task", async () => {
     const { user } = render(<App />);
-    const completedFilter = screen.getByRole("radio", { name: /completed/i });
+    const completedFilter = screen.getAllByRole("button", {
+      name: /completed/i,
+    });
 
-    await user.click(completedFilter);
+    await user.click(completedFilter[0]);
     expect(document.body).toHaveTextContent("Go to the gym");
   });
 
-  test("user able to see active todo", async () => {
+  test("user able to see active task", async () => {
     const { user } = render(<App />);
-    const activeFilter = screen.getByRole("radio", { name: /active/i });
+    const activeFilter = screen.getByRole("button", { name: /active/i });
 
     await user.click(activeFilter);
     expect(document.body).not.toHaveTextContent("Go to the gym");
   });
 
-  test("user able to see all todo", async () => {
+  test("user able to see all task", async () => {
     const { user } = render(<App />);
-    const activeFilter = screen.getByRole("radio", { name: /all/i });
+    const activeFilter = screen.getByRole("button", { name: /all/i });
 
     await user.click(activeFilter);
     expect(document.body).toHaveTextContent("Go to the gym");
   });
 
-  test("user able to create todo and delete", async () => {
+  test("user able to create task and delete", async () => {
     const { user } = render(<App />);
     const deleteButton = screen.getByTestId("delete-button");
     await user.click(deleteButton);
