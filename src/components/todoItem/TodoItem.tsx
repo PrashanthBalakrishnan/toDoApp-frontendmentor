@@ -56,6 +56,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
     <div className="listItem">
       <input
         className="listItem__input"
+        aria-label="Task"
         type="checkbox"
         id={todo.id}
         onChange={(e) => toggleTodo(todo.id, e.target.checked)}
@@ -81,7 +82,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
           <button
             className="listItem__icon"
             data-testid="save-button"
-            aria-label="save edited todo"
+            aria-label="save edited task"
           >
             <FaCheck />
           </button>
@@ -100,7 +101,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
         <button
           data-testid="edit-button"
           className="listItem__icon"
-          aria-label="edit todo"
+          aria-label="edit task"
           onClick={() => {
             if (!edit && !todo.completed) {
               setEdit(!edit);
@@ -112,7 +113,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
         <button
           onClick={() => deleteTodo(todo.id)}
           data-testid="delete-button"
-          aria-label="delete todo"
+          aria-label="delete task"
         >
           <HiOutlineXMark className="listItem__icon" />
         </button>
