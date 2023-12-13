@@ -15,7 +15,6 @@ const TodoFilter: React.FC<TodoFilterProps> = ({ filter, setFilter }) => {
             value="all"
             type="radio"
             className="filter__radioBtn"
-            aria-label="show all filter"
             checked={filter === "all"}
             onChange={() => setFilter("all")}
           />
@@ -26,7 +25,6 @@ const TodoFilter: React.FC<TodoFilterProps> = ({ filter, setFilter }) => {
             name="filter"
             value="active"
             type="radio"
-            aria-label="Active To do filter"
             className="filter__radioBtn"
             checked={filter === "active"}
             onChange={() => setFilter("active")}
@@ -40,7 +38,6 @@ const TodoFilter: React.FC<TodoFilterProps> = ({ filter, setFilter }) => {
             name="filter"
             value="completed"
             type="radio"
-            aria-label="Complete To do filter"
             className="filter__radioBtn"
             data-testid="completed"
             checked={filter === "completed"}
