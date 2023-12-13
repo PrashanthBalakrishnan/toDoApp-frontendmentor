@@ -1,30 +1,59 @@
+import { useState } from "react";
 import { TodoType } from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
 import "./todoList.scss";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
 interface TodoListProps {
   todos: TodoType[];
-  handleClearCompleted: () => void;
-  filter: string;
-  setFilter: (filter: string) => void;
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
 
-const TodoList: React.FC<TodoListProps> = ({
-  todos,
-  handleClearCompleted,
-  filter,
-  setFilter,
-  setTodos,
-}) => {
+const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
+  const [filter, setFilter] = useState("all");
+
+  function handleClearCompleted() {
+    setTodos((currentTodos) => {
+      return currentTodos.filter((todo) => !todo.completed);
+    });
+  }
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "all") {
+      return true;
+    } else if (filter === "active") {
+      return !todo.completed;
+    } else {
+      return todo.completed;
+    }
+  });
+
   return (
     <div className="list">
-      {todos.map((todo: TodoType) => (
-        <div key={todo.id}>
-          <TodoItem todo={todo} setTodos={setTodos} todos={todos} />
-        </div>
-      ))}
+      <Droppable droppableId="todos">
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {filteredTodos.map((todo: TodoType, index) => (
+              <div key={todo.id}>
+                <Draggable draggableId={todo.id.toString()} index={index}>
+                  {(provided) => (
+                    <div
+                      key={todo.id}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      <TodoItem todo={todo} setTodos={setTodos} todos={todos} />
+                    </div>
+                  )}
+                </Draggable>
+              </div>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <div className="list__info">
         <div>
           {todos.length === 0 ? (

@@ -100,7 +100,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
         <button
           data-testid="edit-button"
           className="listItem__icon"
-          aria-label="edit a todo"
+          aria-label="edit todo"
           onClick={() => {
             if (!edit && !todo.completed) {
               setEdit(!edit);

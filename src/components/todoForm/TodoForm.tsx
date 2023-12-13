@@ -1,13 +1,25 @@
+import { TodoType } from "@/src/utils/types";
 import "./todoForm.scss";
 import { useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 
 interface TodoFormProps {
-  addTodo: (newItem: string) => void;
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
+const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
   const [newItem, setNewItem] = useState("");
+
+  function addTodo(title: string) {
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      {
+        id: crypto.randomUUID(),
+        title,
+        completed: false,
+      },
+    ]);
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
