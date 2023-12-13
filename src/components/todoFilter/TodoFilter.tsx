@@ -5,7 +5,7 @@ interface TodoFilterProps {
   filter: string;
 }
 
-const filterNames = ["all", "active", "completed"];
+const filterNames = ["All", "Active", "Completed"];
 
 const TodoFilter: React.FC<TodoFilterProps> = ({ setFilter, filter }) => {
   return filterNames.map((name) => (
