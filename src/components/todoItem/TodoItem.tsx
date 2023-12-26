@@ -88,7 +88,7 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
           </button>
         </form>
       ) : todo.completed ? (
-        <label className="listItem__label" htmlFor={todo.id}>
+        <label className="listItem__label dashed" htmlFor={todo.id}>
           {todo.title}
         </label>
       ) : (
