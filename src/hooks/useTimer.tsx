@@ -45,7 +45,7 @@ export default function useTimer() {
         } else {
           setSeconds((prevSeconds) => prevSeconds - 1);
         }
-      }, 0.1);
+      }, 1000);
     } else {
       clearInterval(interval);
     }
