@@ -1,6 +1,7 @@
 .filter {
   margin-right: 10px;
   cursor: pointer;
+  text-transform: capitalize;
   &:hover {
     color: var(--primary-color);
   }
