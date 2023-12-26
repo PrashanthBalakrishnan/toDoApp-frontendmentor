@@ -74,5 +74,8 @@ export default function useTimer() {
     setTimer,
     setTimeOff,
     setWorkTime,
+    setMinutes,
+    workTime,
+    timeOff,
   };
 }

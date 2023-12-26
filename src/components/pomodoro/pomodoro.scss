@@ -16,6 +16,15 @@
     display: flex;
     justify-content: space-around;
   }
+  &__settings {
+    width: 100%;
+    display: flex;
+    width: fit-content;
+    &:hover {
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+  }
 }
 
 .pomBtn {
