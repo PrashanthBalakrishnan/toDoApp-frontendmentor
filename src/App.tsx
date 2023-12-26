@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import TodoApp from "./components/TodoApp";
 import { useState, useEffect } from "react";
 
@@ -28,6 +29,7 @@ const App = () => {
 
   return (
     <div className={isDarkMode ? "app-Dark" : "app"}>
+      <Toaster />
       <TodoApp isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </div>
   );

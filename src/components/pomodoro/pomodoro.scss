@@ -1,0 +1,27 @@
+.pomodoro {
+  background-color: var(--app-Background-color);
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+
+  &__display {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+.pomBtn {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
+  }
+}
