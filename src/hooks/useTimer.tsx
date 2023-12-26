@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import alarm from "../assets/alarmsound.mp3";
 
 export default function useTimer() {
   const [minutes, setMinutes] = useState(45);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [isBreak, setIsBreak] = useState(false);
+  const [isBreak, setIsBreak] = useState(true);
+  const [isWork, setisWork] = useState(true);
 
   const [timeOff, setTimeOff] = useState(15);
   const [workTime, setWorkTime] = useState(45);
+
+  function play() {
+    new Audio(alarm).play();
+  }
 
   useEffect(() => {
     let interval: number | undefined;
@@ -19,15 +25,18 @@ export default function useTimer() {
           if (minutes === 0) {
             clearInterval(interval);
             setIsActive(false);
-            // You can add a notification or other actions when the timer reaches 0
             if (isBreak) {
-              toast.success("Time is up! Break time!");
+              toast.success("Break time!");
+              play();
               setMinutes(timeOff);
               setIsBreak(false);
+              setisWork((prev) => !prev);
             } else {
-              toast.success("Time is up! Back to work!");
+              toast.success("Back to work!");
+              play();
               setMinutes(workTime);
               setIsBreak(true);
+              setisWork((prev) => !prev);
             }
           } else {
             setMinutes((prevMinutes) => prevMinutes - 1);
@@ -36,7 +45,7 @@ export default function useTimer() {
         } else {
           setSeconds((prevSeconds) => prevSeconds - 1);
         }
-      }, 1000);
+      }, 0.1);
     } else {
       clearInterval(interval);
     }
@@ -65,8 +74,6 @@ export default function useTimer() {
   };
 
   return {
-    minutes,
-    seconds,
     isActive,
     startTimer,
     pauseTimer,
@@ -75,7 +82,11 @@ export default function useTimer() {
     setTimeOff,
     setWorkTime,
     setMinutes,
+    setSeconds,
+    minutes,
+    seconds,
     workTime,
     timeOff,
+    isWork,
   };
 }
