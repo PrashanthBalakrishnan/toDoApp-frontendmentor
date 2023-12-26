@@ -1,0 +1,54 @@
+.pomodoro {
+  background-color: var(--app-Background-color);
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  height: 140px;
+
+  &__display {
+    font-size: 2rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+  }
+  &__settings {
+    width: 100%;
+    display: flex;
+    width: fit-content;
+    &:hover {
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &__input {
+    cursor: pointer;
+    width: 80%;
+  }
+  &__status {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+.pomBtn {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+}
