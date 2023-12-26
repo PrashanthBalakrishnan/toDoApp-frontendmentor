@@ -9,7 +9,9 @@
   &__label {
     cursor: pointer;
     display: flex;
+    align-items: center;
     color: var(--completed-text-color);
+
     &::before {
       content: "";
       width: 25px;
