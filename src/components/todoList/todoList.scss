@@ -16,6 +16,11 @@
     align-items: center;
     padding: 20px 20px;
     color: var(--text-color2);
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   &__infoButton {

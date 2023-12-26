@@ -68,7 +68,7 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
           <TodoFilter setFilter={setFilter} filter={filter} />
         </div>
         <button className="list__infoButton" onClick={handleClearCompleted}>
-          clear completed
+          Clear Completed
         </button>
       </div>
     </div>
