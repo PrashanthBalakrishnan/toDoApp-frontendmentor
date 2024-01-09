@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import alarm from "../assets/alarmsound.mp3";
+import switchsound from "../assets/switchsound.mp3";
 
 export default function useTimer() {
   const [minutes, setMinutes] = useState(45);
@@ -12,8 +13,14 @@ export default function useTimer() {
   const [timeOff, setTimeOff] = useState(15);
   const [workTime, setWorkTime] = useState(45);
 
-  function play() {
+  function playAlarm() {
     new Audio(alarm).play();
+  }
+
+  function clickSound() {
+    const audio = new Audio(switchsound);
+    audio.currentTime = 0;
+    audio.play();
   }
 
   useEffect(() => {
@@ -27,13 +34,13 @@ export default function useTimer() {
             setIsActive(false);
             if (isBreak) {
               toast.success("Break time!");
-              play();
+              playAlarm();
               setMinutes(timeOff);
               setIsBreak(false);
               setisWork((prev) => !prev);
             } else {
               toast.success("Back to work!");
-              play();
+              playAlarm();
               setMinutes(workTime);
               setIsBreak(true);
               setisWork((prev) => !prev);
@@ -55,16 +62,19 @@ export default function useTimer() {
 
   const startTimer = () => {
     setIsActive(true);
+    clickSound();
   };
 
   const pauseTimer = () => {
     setIsActive(false);
+    clickSound();
   };
 
   const resetTimer = () => {
     setIsActive(false);
     setMinutes(workTime);
     setSeconds(0);
+    clickSound();
   };
 
   const setTimer = (minutes: number) => {

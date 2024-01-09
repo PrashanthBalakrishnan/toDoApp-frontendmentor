@@ -33,7 +33,7 @@ const Pomodoro = () => {
     <div className="pomodoro">
       {showSettings ? (
         <form className="pomodoro__form" onSubmit={handleSubmit}>
-          <label>work: {workTime}:00</label>
+          <label>Focus: {workTime}:00</label>
           <input
             className="pomodoro__input"
             type="range"
@@ -42,7 +42,7 @@ const Pomodoro = () => {
             value={workTime}
             onChange={(e) => setWorkTime(Number(e.target.value))}
           />
-          <label>break: {timeOff}:00</label>
+          <label>Break: {timeOff}:00</label>
           <input
             className="pomodoro__input"
             type="range"
@@ -65,7 +65,7 @@ const Pomodoro = () => {
             <CiSettings />
           </button>
           <div className="pomodoro__display">
-            <p className="pomodoro__status">{isWork ? "Work" : "Break"}</p>
+            <p className="pomodoro__status">{isWork ? "Focus" : "Break"}</p>
             <p>
               {String(minutes).padStart(2, "0")}:
               {String(seconds).padStart(2, "0")}
