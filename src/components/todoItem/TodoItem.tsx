@@ -11,9 +11,15 @@ interface TodoListProps {
   todo: TodoType;
   todos: TodoType[];
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
+  setCurrentTask: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
+const TodoItem: React.FC<TodoListProps> = ({
+  setTodos,
+  todo,
+  todos,
+  setCurrentTask,
+}) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.title);
 
@@ -59,8 +65,9 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
         aria-label="Task"
         type="checkbox"
         id={todo.id}
-        onChange={(e) => toggleTodo(todo.id, e.target.checked)}
+        value={todo.title}
         checked={todo.completed}
+        onChange={(e) => toggleTodo(todo.id, e.target.checked)}
       />
 
       {edit ? (
@@ -88,13 +95,19 @@ const TodoItem: React.FC<TodoListProps> = ({ setTodos, todo, todos }) => {
           </button>
         </form>
       ) : todo.completed ? (
-        <label className="listItem__label" htmlFor={todo.id}>
+        <span
+          className="listItem__label"
+          onClick={() => setCurrentTask(todo.title)}
+        >
           <span className="dashed">{todo.title}</span>
-        </label>
+        </span>
       ) : (
-        <label className="listItem__label" htmlFor={todo.id}>
+        <span
+          className="listItem__label"
+          onClick={() => setCurrentTask(todo.title)}
+        >
           {todo.title}
-        </label>
+        </span>
       )}
 
       <div className="listItem__actions">

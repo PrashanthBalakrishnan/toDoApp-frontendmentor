@@ -2,41 +2,52 @@ import { TodoType } from "@/src/utils/types";
 import "./todoForm.scss";
 import { useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
-
 interface TodoFormProps {
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
   const [newItem, setNewItem] = useState("");
+  const [pomodoro, setPomodoro] = useState<number>();
 
-  function addTodo(title: string) {
+  function addTodo(title: string, totalPomodoro: number) {
     setTodos((prevTodos) => [
       ...prevTodos,
       {
         id: crypto.randomUUID(),
         title,
         completed: false,
+        pomodoroCount: 0,
+        totalPomodoro,
       },
     ]);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTodo(newItem);
+    addTodo(newItem, pomodoro || 1);
     setNewItem("");
+    setPomodoro(1);
   };
+
   return (
     <form onSubmit={handleSubmit} className="form">
       <div className="form__container">
-        <input
-          className="form__input"
-          type="text"
-          placeholder="Create a new task..."
-          value={newItem}
-          onChange={(e) => setNewItem(e.target.value)}
-        />
-        <div className="form__circle" />
+        <div className="form__inputItems">
+          <input
+            type="text"
+            placeholder="Create a new task..."
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Est Pomodoros"
+            value={pomodoro}
+            onChange={(e) => setPomodoro(e.target.valueAsNumber)}
+            required
+          />
+        </div>
         <button
           className="form__button"
           type="submit"

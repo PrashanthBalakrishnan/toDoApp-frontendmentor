@@ -14,10 +14,10 @@ const Pomodoro = () => {
     resetTimer,
     minutes,
     seconds,
-    workTime,
+    focus,
     timeOff,
     setTimeOff,
-    setWorkTime,
+    setFocus,
     setMinutes,
     setSeconds,
     isWork,
@@ -26,21 +26,21 @@ const Pomodoro = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowSettings(false);
-    setMinutes(workTime);
+    setMinutes(focus);
     setSeconds(0);
   };
   return (
     <div className="pomodoro">
       {showSettings ? (
         <form className="pomodoro__form" onSubmit={handleSubmit}>
-          <label>Focus: {workTime}:00</label>
+          <label>Focus: {focus}:00</label>
           <input
             className="pomodoro__input"
             type="range"
             min="1"
             max="60"
-            value={workTime}
-            onChange={(e) => setWorkTime(Number(e.target.value))}
+            value={focus}
+            onChange={(e) => setFocus(Number(e.target.value))}
           />
           <label>Break: {timeOff}:00</label>
           <input

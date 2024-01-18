@@ -11,8 +11,8 @@ export default function useTimer() {
   const [isWork, setisWork] = useState(true);
 
   const [timeOff, setTimeOff] = useState(15);
-  const [workTime, setWorkTime] = useState(45);
-
+  const [focus, setFocus] = useState(45);
+  const [pomodoroCounter, setPomodoroCounter] = useState<number>(0);
   function playAlarm() {
     new Audio(alarm).play();
   }
@@ -38,10 +38,11 @@ export default function useTimer() {
               setMinutes(timeOff);
               setIsBreak(false);
               setisWork((prev) => !prev);
+              setPomodoroCounter((prev) => prev + 1);
             } else {
               toast.success("Back to work!");
               playAlarm();
-              setMinutes(workTime);
+              setMinutes(focus);
               setIsBreak(true);
               setisWork((prev) => !prev);
             }
@@ -58,7 +59,7 @@ export default function useTimer() {
     }
 
     return () => clearInterval(interval);
-  }, [isActive, minutes, seconds, timeOff, isBreak, workTime]);
+  }, [isActive, minutes, seconds, timeOff, isBreak, focus]);
 
   const startTimer = () => {
     setIsActive(true);
@@ -72,7 +73,7 @@ export default function useTimer() {
 
   const resetTimer = () => {
     setIsActive(false);
-    setMinutes(workTime);
+    setMinutes(focus);
     setSeconds(0);
     clickSound();
   };
@@ -90,13 +91,14 @@ export default function useTimer() {
     resetTimer,
     setTimer,
     setTimeOff,
-    setWorkTime,
+    setFocus,
     setMinutes,
     setSeconds,
     minutes,
     seconds,
-    workTime,
+    focus,
     timeOff,
     isWork,
+    pomodoroCounter,
   };
 }

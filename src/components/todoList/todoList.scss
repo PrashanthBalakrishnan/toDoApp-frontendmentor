@@ -3,6 +3,15 @@
   margin-top: 25px;
   border-radius: 10px;
 
+  &__currentTask {
+    padding: 10px 20px;
+    color: var(--text-color2);
+  }
+
+  &__taskName {
+    color: var(--primary-color);
+  }
+
   &__item {
     border-bottom: 1px solid var(--border-color);
     &:last-child {

@@ -37,7 +37,6 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
     newTodos.splice(destination.index, 0, reorderedItem);
     return setTodos(newTodos);
   };
-
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <main className="main">
@@ -54,6 +53,7 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
         <Pomodoro />
 
         <TodoForm setTodos={setTodos} />
+
         <TodoList setTodos={setTodos} todos={todos} />
         <p className="main__dragmessage">Drag and drop to reorder list</p>
       </main>

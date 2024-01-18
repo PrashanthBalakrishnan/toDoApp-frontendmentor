@@ -11,8 +11,9 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
-  const [filter, setFilter] = useState("all");
+  const [currentTask, setCurrentTask] = useState<string>(todos[0]?.title || "");
 
+  const [filter, setFilter] = useState("all");
   function handleClearCompleted() {
     setTodos((currentTodos) => {
       return currentTodos.filter((todo) => !todo.completed);
@@ -31,6 +32,10 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
 
   return (
     <div className="list">
+      <div className="list__currentTask">
+        Current Task: <span className="list__taskName">{currentTask}</span>
+      </div>
+
       <Droppable droppableId="todos">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -44,7 +49,12 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      <TodoItem todo={todo} setTodos={setTodos} todos={todos} />
+                      <TodoItem
+                        todo={todo}
+                        setTodos={setTodos}
+                        todos={todos}
+                        setCurrentTask={setCurrentTask}
+                      />
                     </div>
                   )}
                 </Draggable>
