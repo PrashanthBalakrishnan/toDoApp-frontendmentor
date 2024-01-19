@@ -9,19 +9,10 @@
     gap: 1rem;
     color: var(--text-color);
     padding: 20px;
+    background-color: var(--app-Background-color);
+    border-radius: 10px;
   }
 
-  &__input {
-    background-color: var(--app-Background-color);
-    padding: 23px 70px;
-    width: 100%;
-    border-radius: 10px;
-    outline: none;
-    color: var(--text-color);
-    &:focus {
-      outline: transparent;
-    }
-  }
   &__circle {
     position: absolute;
     border-radius: 50%;

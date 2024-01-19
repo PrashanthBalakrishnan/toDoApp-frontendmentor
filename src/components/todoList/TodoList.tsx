@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoType } from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
@@ -29,7 +29,15 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
       return todo.completed;
     }
   });
+  useEffect(() => {
+    if (todos.length === 0) {
+      setCurrentTask("");
+    }
 
+    if (todos.length > 0 && currentTask === "") {
+      setCurrentTask(todos[0].title);
+    }
+  }, [todos, currentTask]);
   return (
     <div className="list">
       <div className="list__currentTask">

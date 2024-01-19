@@ -5,39 +5,15 @@
   border-radius: 10px;
   padding: 1rem;
   text-align: center;
-  height: 140px;
   box-shadow: var(--boxshadow);
   &__display {
     font-size: 2rem;
   }
 
-  &__buttons {
-    display: flex;
-    justify-content: center;
-  }
-  &__settings {
-    width: 100%;
-    display: flex;
-    width: fit-content;
-    &:hover {
-      cursor: pointer;
-      color: var(--primary-color);
-    }
-  }
-
-  &__form {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-  }
-  &__input {
-    cursor: pointer;
-    width: 80%;
-  }
-  &__status {
-    font-size: 1.5rem;
-    font-weight: bold;
+  &__btn {
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 10px;
   }
 }
 

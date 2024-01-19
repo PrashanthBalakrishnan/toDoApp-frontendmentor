@@ -41,7 +41,6 @@ const TodoItem: React.FC<TodoListProps> = ({
       });
     });
   }
-
   const handleEdit = (e: React.FormEvent, id: string) => {
     e.preventDefault();
     setTodos(
@@ -57,7 +56,6 @@ const TodoItem: React.FC<TodoListProps> = ({
       inputRef.current?.focus();
     }
   }, [edit]);
-
   return (
     <div className="listItem">
       <input
@@ -100,14 +98,24 @@ const TodoItem: React.FC<TodoListProps> = ({
           onClick={() => setCurrentTask(todo.title)}
         >
           <span className="dashed">{todo.title}</span>
+
+          <span>
+            {todo.pomodoroCount}/{todo.totalPomodoro}
+          </span>
         </span>
       ) : (
-        <span
-          className="listItem__label"
-          onClick={() => setCurrentTask(todo.title)}
-        >
-          {todo.title}
-        </span>
+        <>
+          <span
+            className="listItem__label"
+            onClick={() => setCurrentTask(todo.title)}
+          >
+            {todo.title}
+          </span>
+
+          <span>
+            {todo.pomodoroCount}/{todo.totalPomodoro}
+          </span>
+        </>
       )}
 
       <div className="listItem__actions">

@@ -8,7 +8,7 @@ interface TodoFormProps {
 
 const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
   const [newItem, setNewItem] = useState("");
-  const [pomodoro, setPomodoro] = useState<number>();
+  const [pomodoro, setPomodoro] = useState(1);
 
   function addTodo(title: string, totalPomodoro: number) {
     setTodos((prevTodos) => [
@@ -35,14 +35,18 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
       <div className="form__container">
         <div className="form__inputItems">
           <input
+            className="form__input"
             type="text"
             placeholder="Create a new task..."
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
           />
           <input
+            className="form__input"
             type="number"
             placeholder="Est Pomodoros"
+            min={0}
+            max={24}
             value={pomodoro}
             onChange={(e) => setPomodoro(e.target.valueAsNumber)}
             required
