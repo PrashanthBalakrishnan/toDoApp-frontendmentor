@@ -13,16 +13,6 @@
     border-radius: 10px;
   }
 
-  &__circle {
-    position: absolute;
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 25px;
-    border: 1px solid var(--border-color);
-  }
   &__button {
     position: absolute;
     z-index: 99;

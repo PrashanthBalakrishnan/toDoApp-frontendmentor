@@ -39,7 +39,6 @@ li {
   --app-Background-color: hsl(0, 0%, 100%);
   --completed-text-color: hsl(0, 0%, 6%);
   --text-color: hsl(235, 19%, 35%);
-  --text-color2: hsl(0, 0%, 12%);
   --hover-color: hsl(235, 21%, 11%);
   --boxshadow: rgba(149, 157, 165, 0.2) 0px 8px 14px;
   --border-color: hsl(252, 11%, 91%);
@@ -52,7 +51,6 @@ body[data-theme="dark"] {
   --app-Background-color: hsl(235, 24%, 19%);
   --completed-text-color: hsl(233, 11%, 84%);
   --text-color: hsl(0, 0%, 100%);
-  --text-color2: hsl(0, 0%, 100%);
   --hover-color: hsl(236, 33%, 92%);
   --boxshadow: rgba(0, 0, 0, 0.2) 0px 8px 14px;
   --border-color: hsl(235, 17%, 26%);
@@ -110,7 +108,7 @@ main {
     display: flex;
     justify-content: space-between;
     color: white;
-    margin-bottom: 5rem;
+    margin-bottom: 1rem;
   }
   &__logo {
     text-transform: uppercase;

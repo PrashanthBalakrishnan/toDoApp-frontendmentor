@@ -5,7 +5,9 @@
 
   &__currentTask {
     padding: 10px 20px;
-    color: var(--text-color2);
+    color: var(--text-color);
+    word-wrap: break-word;
+    text-align: center;
   }
 
   &__taskName {

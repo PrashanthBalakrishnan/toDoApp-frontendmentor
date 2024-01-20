@@ -6,7 +6,7 @@ import { LuSun } from "react-icons/lu";
 
 import { TodoType } from "../utils/types";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import Pomodoro from "./pomodoro/Pomodoro";
+
 interface TodoAppProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
@@ -50,7 +50,6 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
             {isDarkMode ? <LuSun /> : <FaMoon />}
           </button>
         </header>
-        <Pomodoro />
 
         <TodoForm setTodos={setTodos} />
 

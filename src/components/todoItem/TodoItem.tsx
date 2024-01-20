@@ -1,11 +1,11 @@
 import { HiOutlineXMark } from "react-icons/hi2";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { FaCheck } from "react-icons/fa";
 
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 
 import "./todoItem.scss";
 import { TodoType } from "@/src/utils/types";
+import EditForm from "./components/EditForm";
 
 interface TodoListProps {
   todo: TodoType;
@@ -21,9 +21,6 @@ const TodoItem: React.FC<TodoListProps> = ({
   setCurrentTask,
 }) => {
   const [edit, setEdit] = useState<boolean>(false);
-  const [editTodo, setEditTodo] = useState<string>(todo.title);
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   function deleteTodo(id: string) {
     return setTodos((currentTodos) => {
@@ -41,25 +38,11 @@ const TodoItem: React.FC<TodoListProps> = ({
       });
     });
   }
-  const handleEdit = (e: React.FormEvent, id: string) => {
-    e.preventDefault();
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, title: editTodo } : todo
-      )
-    );
-    setEdit(false);
-  };
 
-  useEffect(() => {
-    if (edit) {
-      inputRef.current?.focus();
-    }
-  }, [edit]);
   return (
-    <div className="listItem">
+    <div className="todoItem">
       <input
-        className="listItem__input"
+        className="todoItem__check"
         aria-label="Task"
         type="checkbox"
         id={todo.id}
@@ -69,74 +52,50 @@ const TodoItem: React.FC<TodoListProps> = ({
       />
 
       {edit ? (
-        <form
-          className="listItem__form"
-          onSubmit={(e) => handleEdit(e, todo.id)}
-        >
-          <label htmlFor={todo.id} className="sr-only">
-            Title:
-          </label>
-          <input
-            id={todo.id}
-            ref={inputRef}
-            value={editTodo}
-            data-testid="edit-input"
-            onChange={(e) => setEditTodo(e.target.value)}
-            className="listItem__inputEdit"
-          />
-          <button
-            className="listItem__icon"
-            data-testid="save-button"
-            aria-label="save edited task"
-          >
-            <FaCheck />
-          </button>
-        </form>
-      ) : todo.completed ? (
-        <span
-          className="listItem__label"
-          onClick={() => setCurrentTask(todo.title)}
-        >
-          <span className="dashed">{todo.title}</span>
-
-          <span>
-            {todo.pomodoroCount}/{todo.totalPomodoro}
-          </span>
-        </span>
+        <EditForm
+          todo={todo}
+          edit={edit}
+          setEdit={setEdit}
+          setTodos={setTodos}
+          todos={todos}
+        />
       ) : (
-        <>
-          <span
-            className="listItem__label"
+        <div className="todoItem__labelContainer">
+          <div
             onClick={() => setCurrentTask(todo.title)}
+            className={
+              todo.completed ? "dashed todoItem__label" : "todoItem__label"
+            }
           >
             {todo.title}
-          </span>
-
-          <span>
+          </div>
+          <div>
             {todo.pomodoroCount}/{todo.totalPomodoro}
-          </span>
-        </>
+          </div>
+        </div>
       )}
 
-      <div className="listItem__actions">
+      <div className="todoItem__actionContainer">
         <button
+          className="todoItem__actionBtns"
           data-testid="edit-button"
-          className="listItem__icon"
           aria-label="edit task"
           onClick={() => {
-            if (!edit && !todo.completed) {
+            if (!edit) {
               setEdit(!edit);
             }
           }}
         >
-          <MdOutlineModeEdit />
+          <MdOutlineModeEdit className="icon" />
         </button>
+
         <button
+          className="todoItem__actionBtns"
           onClick={() => deleteTodo(todo.id)}
           data-testid="delete-button"
           aria-label="delete task"
         >
-          <HiOutlineXMark className="listItem__icon" />
+          <HiOutlineXMark className="icon" />
         </button>
       </div>
     </div>

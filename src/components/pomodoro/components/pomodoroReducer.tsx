@@ -7,6 +7,7 @@ export const initialState: PomodoroState = {
   seconds: 0,
   isActive: false,
   isBreak: false,
+  pomodoro: 0,
 };
 
 function playAlarm() {
@@ -33,7 +34,10 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
         if (state.minutes === 0) {
           toast.success(state.isBreak ? "Break time!" : "Back to work!");
           playAlarm();
-          return { ...initialState, isBreak: !state.isBreak };
+          return {
+            ...initialState,
+            isBreak: !state.isBreak,
+          };
         } else {
           return { ...state, minutes: state.minutes - 1, seconds: 59 };
         }

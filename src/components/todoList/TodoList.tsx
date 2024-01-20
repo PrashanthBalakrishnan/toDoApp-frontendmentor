@@ -4,6 +4,7 @@ import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
 import "./todoList.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import Pomodoro from "../pomodoro/Pomodoro";
 
 interface TodoListProps {
   todos: TodoType[];
@@ -40,6 +41,8 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
   }, [todos, currentTask]);
   return (
     <div className="list">
+      <Pomodoro />
+
       <div className="list__currentTask">
         Current Task: <span className="list__taskName">{currentTask}</span>
       </div>

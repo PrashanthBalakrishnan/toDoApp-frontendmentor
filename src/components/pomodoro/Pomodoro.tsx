@@ -3,26 +3,25 @@ import { initialState, pomodoroReducer } from "./components/pomodoroReducer";
 import { TIMER_ACTIONS } from "../../../src/utils/types";
 import "./pomodoro.scss";
 
-import { CiSettings } from "react-icons/ci";
-import { FaPlay, FaPause, FaSave } from "react-icons/fa";
+// import { CiSettings } from "react-icons/ci";
+import { FaPlay, FaPause } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 
 const Pomodoro = () => {
   const [state, dispatch] = useReducer(pomodoroReducer, initialState);
-
   useEffect(() => {
     let interval: number | undefined;
 
     if (state.isActive) {
       interval = setInterval(() => {
         dispatch({ type: TIMER_ACTIONS.TICK });
-      }, 1);
+      }, 1000);
     } else {
       clearInterval(interval);
     }
 
     return () => clearInterval(interval);
-  }, [state]);
+  }, [state.isActive]);
 
   const startTimer = () => {
     dispatch({ type: TIMER_ACTIONS.START });
@@ -76,7 +75,7 @@ const Pomodoro = () => {
         >
           <GrPowerReset />
         </button>
-        <button className="pomodoro__btn" onClick={switchMode}>
+        <button className="pomodoro__btnMode" onClick={switchMode}>
           Switch Mode
         </button>
       </div>
