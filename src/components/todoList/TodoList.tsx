@@ -10,9 +10,18 @@ interface TodoListProps {
   todos: TodoType[];
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
+const defaultValue = {
+  id: "",
+  title: "No tasks",
+  completed: false,
+  pomodoroCount: 0,
+  totalPomodoro: 0,
+};
 
 const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
-  const [currentTask, setCurrentTask] = useState<string>(todos[0]?.title || "");
+  const [currentTask, setCurrentTask] = useState<TodoType>(
+    todos[0] || defaultValue
+  );
 
   const [filter, setFilter] = useState("all");
   function handleClearCompleted() {
@@ -32,19 +41,16 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
   });
   useEffect(() => {
     if (todos.length === 0) {
-      setCurrentTask("");
-    }
-
-    if (todos.length > 0 && currentTask === "") {
-      setCurrentTask(todos[0].title);
+      setCurrentTask(defaultValue);
     }
   }, [todos, currentTask]);
   return (
     <div className="list">
-      <Pomodoro />
+      <Pomodoro currentTask={currentTask} />
 
       <div className="list__currentTask">
-        Current Task: <span className="list__taskName">{currentTask}</span>
+        Current Task:
+        <span className="list__taskName">{currentTask.title}</span>
       </div>
 
       <Droppable droppableId="todos">

@@ -2,12 +2,16 @@ import { useReducer, useEffect } from "react";
 import { initialState, pomodoroReducer } from "./components/pomodoroReducer";
 import { TIMER_ACTIONS } from "../../../src/utils/types";
 import "./pomodoro.scss";
+import { TodoType } from "../../utils/types";
 
 // import { CiSettings } from "react-icons/ci";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 
-const Pomodoro = () => {
+interface PomodoroProps {
+  currentTask: TodoType;
+}
+const Pomodoro = ({ currentTask }: PomodoroProps) => {
   const [state, dispatch] = useReducer(pomodoroReducer, initialState);
   useEffect(() => {
     let interval: number | undefined;
@@ -19,9 +23,9 @@ const Pomodoro = () => {
     } else {
       clearInterval(interval);
     }
-
+    currentTask.pomodoroCount++;
     return () => clearInterval(interval);
-  }, [state.isActive]);
+  }, [state.isActive, currentTask]);
 
   const startTimer = () => {
     dispatch({ type: TIMER_ACTIONS.START });
@@ -38,6 +42,7 @@ const Pomodoro = () => {
   const switchMode = () => {
     dispatch({ type: TIMER_ACTIONS.SWITCH_MODE });
   };
+  console.log("current Task" + currentTask.id);
 
   return (
     <div className="pomodoro">

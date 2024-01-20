@@ -11,7 +11,7 @@ interface TodoListProps {
   todo: TodoType;
   todos: TodoType[];
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  setCurrentTask: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentTask: React.Dispatch<React.SetStateAction<TodoType>>;
 }
 
 const TodoItem: React.FC<TodoListProps> = ({
@@ -39,6 +39,17 @@ const TodoItem: React.FC<TodoListProps> = ({
     });
   }
 
+  // function increasePomodoroCount(id: string) {
+  //   setTodos((currentTodos) => {
+  //     return currentTodos.map((todo) => {
+  //       if (todo.id === id) {
+  //         return { ...todo, pomodoroCount: todo.pomodoroCount + 1 };
+  //       }
+  //       return todo;
+  //     });
+  //   });
+  // }
+  console.log(todo);
   return (
     <div className="todoItem">
       <input
@@ -62,7 +73,7 @@ const TodoItem: React.FC<TodoListProps> = ({
       ) : (
         <div className="todoItem__labelContainer">
           <div
-            onClick={() => setCurrentTask(todo.title)}
+            onClick={() => setCurrentTask(todo)}
             className={
               todo.completed ? "dashed todoItem__label" : "todoItem__label"
             }
