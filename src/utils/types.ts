@@ -13,10 +13,13 @@ export enum TIMER_ACTIONS {
   PAUSE = "PAUSE",
   RESET = "RESET",
   TICK = "TICK",
-  SWITCH_MODE = "SWITCH_MODE",
+  SET_FOCUS = "SET_FOCUS",
+  SET_BREAK = "SET_BREAK",
+  TAKE_BREAK = "TAKE_BREAK",
 }
 export interface PomodoroState {
-  minutes: number;
+  focusMinutes: number | undefined;
+  breakMinutes: number | undefined;
   seconds: number;
   isActive: boolean;
   isBreak: boolean;
@@ -25,15 +28,9 @@ export interface PomodoroState {
 // Define action types
 interface PomodoroAction {
   type: TIMER_ACTIONS;
+  payload?: {
+    minutes?: number;
+  };
 }
 
-// Define specific action types
-interface TickAction extends PomodoroAction {
-  type: TIMER_ACTIONS.TICK;
-}
-
-interface SwitchModeAction extends PomodoroAction {
-  type: TIMER_ACTIONS.SWITCH_MODE;
-}
-
-export type Action = TickAction | SwitchModeAction | PomodoroAction;
+export type Action = PomodoroAction;

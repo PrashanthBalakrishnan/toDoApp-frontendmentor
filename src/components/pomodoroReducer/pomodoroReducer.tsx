@@ -2,7 +2,8 @@ import { Action, PomodoroState, TIMER_ACTIONS } from "../../utils/types";
 import alarm from "../../assets/alarmsound.mp3";
 
 export const initialState: PomodoroState = {
-  minutes: 1,
+  focusMinutes: 45,
+  breakMinutes: 15,
   seconds: 0,
   isActive: false,
   isBreak: false,
@@ -27,23 +28,57 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
     case TIMER_ACTIONS.RESET: {
       return { ...initialState };
     }
+
+    case TIMER_ACTIONS.SET_FOCUS: {
+      return { ...state, focusMinutes: action.payload?.minutes };
+    }
+
+    case TIMER_ACTIONS.SET_BREAK: {
+      return { ...state, breakMinutes: action.payload?.minutes };
+    }
     case TIMER_ACTIONS.TICK: {
-      if (state.seconds === 0) {
-        if (state.minutes === 0) {
-          playAlarm();
-          return {
-            ...initialState,
-            isBreak: !state.isBreak,
-          };
+      if (!state.isBreak) {
+        if (state.seconds === 0) {
+          if (state.focusMinutes === 0) {
+            playAlarm();
+            return {
+              ...initialState,
+              isBreak: !state.isBreak,
+            };
+          } else {
+            return {
+              ...state,
+              focusMinutes: (state.focusMinutes ?? 0) - 1,
+              seconds: 59,
+            };
+          }
         } else {
-          return { ...state, minutes: state.minutes - 1, seconds: 59 };
+          return { ...state, seconds: state.seconds - 1 };
         }
       } else {
-        return { ...state, seconds: state.seconds - 1 };
+        if (state.seconds === 0) {
+          if (state.breakMinutes === 0) {
+            playAlarm();
+            return {
+              ...initialState,
+              isBreak: !state.isBreak,
+            };
+          } else {
+            return {
+              ...state,
+              breakMinutes: (state.breakMinutes ?? 0) - 1,
+              seconds: 59,
+            };
+          }
+        } else {
+          return { ...state, seconds: state.seconds - 1 };
+        }
       }
     }
-    case TIMER_ACTIONS.SWITCH_MODE:
-      return { ...initialState, isBreak: !state.isBreak };
+
+    case TIMER_ACTIONS.TAKE_BREAK: {
+      return { ...state, isBreak: true };
+    }
 
     default:
       return state;

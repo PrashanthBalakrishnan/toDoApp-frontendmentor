@@ -35,8 +35,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
       <div className="form__container">
         <div className="form__inputItems">
           <div>
-            <label className="sr-only">Task:</label>
+            <label htmlFor="task" className="sr-only">
+              Task:
+            </label>
             <input
+              id="task"
               className="form__inputTask"
               type="text"
               placeholder="What are you working on"
@@ -45,10 +48,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
             />
           </div>
           <div className="form__inputPomContainer">
-            <label>Est Pomodoros:</label>
+            <label htmlFor="pomodoro">Est Pomodoros:</label>
             <input
               className="form__inputPom"
               type="number"
+              id="pomodoro"
               min={1}
               max={24}
               value={pomodoro}

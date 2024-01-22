@@ -2,7 +2,7 @@ import { TodoType } from "../../../utils/types";
 import { useEffect, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 
-import "../todoItem.scss";
+import "./editform.scss";
 
 interface EditFormProps {
   todo: TodoType;

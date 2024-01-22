@@ -50,6 +50,9 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
     if (todos.length === 0) {
       setCurrentTask(defaultValue);
     }
+    if (currentTask.id === "") {
+      setCurrentTask(todos[0] || defaultValue);
+    }
   }, [todos, currentTask]);
   return (
     <div className="list">

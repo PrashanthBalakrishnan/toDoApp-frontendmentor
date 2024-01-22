@@ -1,0 +1,20 @@
+.editForm {
+  width: 85%;
+  display: flex;
+  &__label {
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__button {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+}
+
+.dashed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
