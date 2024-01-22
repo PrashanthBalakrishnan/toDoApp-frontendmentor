@@ -1,13 +1,11 @@
-import { Action, PomodoroState, TIMER_ACTIONS } from "../../../utils/types";
-import toast from "react-hot-toast";
-import alarm from "../../../assets/alarmsound.mp3";
+import { Action, PomodoroState, TIMER_ACTIONS } from "../../utils/types";
+import alarm from "../../assets/alarmsound.mp3";
 
 export const initialState: PomodoroState = {
-  minutes: 25,
+  minutes: 1,
   seconds: 0,
   isActive: false,
   isBreak: false,
-  pomodoro: 0,
 };
 
 function playAlarm() {
@@ -32,7 +30,6 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
     case TIMER_ACTIONS.TICK: {
       if (state.seconds === 0) {
         if (state.minutes === 0) {
-          toast.success(state.isBreak ? "Break time!" : "Back to work!");
           playAlarm();
           return {
             ...initialState,
@@ -47,6 +44,7 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
     }
     case TIMER_ACTIONS.SWITCH_MODE:
       return { ...initialState, isBreak: !state.isBreak };
+
     default:
       return state;
   }

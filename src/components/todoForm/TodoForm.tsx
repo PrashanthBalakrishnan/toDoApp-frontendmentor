@@ -34,23 +34,28 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
     <form onSubmit={handleSubmit} className="form">
       <div className="form__container">
         <div className="form__inputItems">
-          <input
-            className="form__input"
-            type="text"
-            placeholder="Create a new task..."
-            value={newItem}
-            onChange={(e) => setNewItem(e.target.value)}
-          />
-          <input
-            className="form__input"
-            type="number"
-            placeholder="Est Pomodoros"
-            min={0}
-            max={24}
-            value={pomodoro}
-            onChange={(e) => setPomodoro(e.target.valueAsNumber)}
-            required
-          />
+          <div>
+            <label className="sr-only">Task:</label>
+            <input
+              className="form__inputTask"
+              type="text"
+              placeholder="What are you working on"
+              value={newItem}
+              onChange={(e) => setNewItem(e.target.value)}
+            />
+          </div>
+          <div className="form__inputPomContainer">
+            <label>Est Pomodoros:</label>
+            <input
+              className="form__inputPom"
+              type="number"
+              min={1}
+              max={24}
+              value={pomodoro}
+              onChange={(e) => setPomodoro(e.target.valueAsNumber)}
+              required
+            />
+          </div>
         </div>
         <button
           className="form__button"
@@ -59,7 +64,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
           data-testid="submit-button"
           disabled={!newItem.trim()}
         >
-          <AiOutlineRight />
+          <AiOutlineRight className="icon" />
         </button>
       </div>
     </form>

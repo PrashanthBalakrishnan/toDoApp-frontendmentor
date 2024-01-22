@@ -1,17 +1,19 @@
 import { HiOutlineXMark } from "react-icons/hi2";
 import { MdOutlineModeEdit } from "react-icons/md";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./todoItem.scss";
-import { TodoType } from "@/src/utils/types";
+import { Action, TIMER_ACTIONS, TodoType } from "../../utils/types";
 import EditForm from "./components/EditForm";
+import { useCallback } from "react";
 
 interface TodoListProps {
   todo: TodoType;
   todos: TodoType[];
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   setCurrentTask: React.Dispatch<React.SetStateAction<TodoType>>;
+  dispatch: React.Dispatch<Action>;
 }
 
 const TodoItem: React.FC<TodoListProps> = ({
@@ -19,6 +21,7 @@ const TodoItem: React.FC<TodoListProps> = ({
   todo,
   todos,
   setCurrentTask,
+  dispatch,
 }) => {
   const [edit, setEdit] = useState<boolean>(false);
 
@@ -28,28 +31,28 @@ const TodoItem: React.FC<TodoListProps> = ({
     });
   }
 
-  function toggleTodo(id: string, completed: boolean) {
-    setTodos((currentTodos) => {
-      return currentTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed };
-        }
-        return todo;
-      });
-    });
-  }
+  // ...
 
-  // function increasePomodoroCount(id: string) {
-  //   setTodos((currentTodos) => {
-  //     return currentTodos.map((todo) => {
-  //       if (todo.id === id) {
-  //         return { ...todo, pomodoroCount: todo.pomodoroCount + 1 };
-  //       }
-  //       return todo;
-  //     });
-  //   });
-  // }
-  console.log(todo);
+  const toggleTodo = useCallback(
+    (id: string, completed: boolean) => {
+      setTodos((currentTodos) => {
+        return currentTodos.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, completed };
+          }
+          return todo;
+        });
+      });
+    },
+    [setTodos]
+  );
+
+  useEffect(() => {
+    if (todo.pomodoroCount === todo.totalPomodoro) {
+      toggleTodo(todo.id, true);
+    }
+  }, [todo.pomodoroCount, todo.totalPomodoro, toggleTodo, todo.id]);
+
   return (
     <div className="todoItem">
       <input
@@ -73,7 +76,9 @@ const TodoItem: React.FC<TodoListProps> = ({
       ) : (
         <div className="todoItem__labelContainer">
           <div
-            onClick={() => setCurrentTask(todo)}
+            onClick={() => {
+              setCurrentTask(todo), dispatch({ type: TIMER_ACTIONS.RESET });
+            }}
             className={
               todo.completed ? "dashed todoItem__label" : "todoItem__label"
             }

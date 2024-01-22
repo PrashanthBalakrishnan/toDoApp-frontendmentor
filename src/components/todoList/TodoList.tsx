@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { TodoType } from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
 import "./todoList.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Pomodoro from "../pomodoro/Pomodoro";
+
+import {
+  initialState,
+  pomodoroReducer,
+} from "../pomodoroReducer/pomodoroReducer";
 
 interface TodoListProps {
   todos: TodoType[];
@@ -22,6 +27,8 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
   const [currentTask, setCurrentTask] = useState<TodoType>(
     todos[0] || defaultValue
   );
+
+  const [state, dispatch] = useReducer(pomodoroReducer, initialState);
 
   const [filter, setFilter] = useState("all");
   function handleClearCompleted() {
@@ -46,7 +53,13 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
   }, [todos, currentTask]);
   return (
     <div className="list">
-      <Pomodoro currentTask={currentTask} />
+      <Pomodoro
+        currentTask={currentTask}
+        setCurrentTask={setCurrentTask}
+        setTodos={setTodos}
+        state={state}
+        dispatch={dispatch}
+      />
 
       <div className="list__currentTask">
         Current Task:
@@ -71,6 +84,7 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
                         setTodos={setTodos}
                         todos={todos}
                         setCurrentTask={setCurrentTask}
+                        dispatch={dispatch}
                       />
                     </div>
                   )}

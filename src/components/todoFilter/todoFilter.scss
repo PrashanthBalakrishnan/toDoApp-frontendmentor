@@ -2,6 +2,7 @@
   margin-right: 10px;
   cursor: pointer;
   text-transform: capitalize;
+  color: var(--text-color);
   &:hover {
     color: var(--primary-color);
   }

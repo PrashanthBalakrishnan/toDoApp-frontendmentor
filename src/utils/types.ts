@@ -20,7 +20,6 @@ export interface PomodoroState {
   seconds: number;
   isActive: boolean;
   isBreak: boolean;
-  pomodoro: number;
 }
 
 // Define action types

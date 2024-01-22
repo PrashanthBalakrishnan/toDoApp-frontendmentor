@@ -19,6 +19,10 @@
   &__label {
     word-wrap: break-word;
     width: 90%;
+    cursor: pointer;
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 
   &__actionContainer {
@@ -51,12 +55,4 @@
 .dashed {
   text-decoration: line-through;
   opacity: 0.5;
-}
-
-.icon {
-  width: 25px;
-  height: 25px;
-  &:hover {
-    color: var(--primary-color);
-  }
 }

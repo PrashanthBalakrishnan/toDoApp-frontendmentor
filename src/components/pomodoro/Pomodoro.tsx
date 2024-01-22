@@ -1,31 +1,54 @@
-import { useReducer, useEffect } from "react";
-import { initialState, pomodoroReducer } from "./components/pomodoroReducer";
-import { TIMER_ACTIONS } from "../../../src/utils/types";
-import "./pomodoro.scss";
-import { TodoType } from "../../utils/types";
+import { useEffect } from "react";
 
-// import { CiSettings } from "react-icons/ci";
+import { Action, TIMER_ACTIONS, TodoType } from "../../../src/utils/types";
+import "./pomodoro.scss";
+
+import { CiSettings } from "react-icons/ci";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
+import { initialState } from "../pomodoroReducer/pomodoroReducer";
 
 interface PomodoroProps {
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   currentTask: TodoType;
+  setCurrentTask: React.Dispatch<React.SetStateAction<TodoType>>;
+  state: typeof initialState;
+  dispatch: React.Dispatch<Action>;
 }
-const Pomodoro = ({ currentTask }: PomodoroProps) => {
-  const [state, dispatch] = useReducer(pomodoroReducer, initialState);
+
+const Pomodoro = ({
+  setTodos,
+  currentTask,
+  state,
+  dispatch,
+}: PomodoroProps) => {
   useEffect(() => {
     let interval: number | undefined;
+
+    function increasePomodoroCount(id: string) {
+      setTodos((currentTodos) => {
+        return currentTodos.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, pomodoroCount: todo.pomodoroCount + 1 };
+          }
+          return todo;
+        });
+      });
+    }
 
     if (state.isActive) {
       interval = setInterval(() => {
         dispatch({ type: TIMER_ACTIONS.TICK });
-      }, 1000);
+      }, 1);
     } else {
       clearInterval(interval);
+      if (state.isBreak) {
+        increasePomodoroCount(currentTask.id);
+      }
     }
-    currentTask.pomodoroCount++;
+
     return () => clearInterval(interval);
-  }, [state.isActive, currentTask]);
+  }, [state.isActive, state.isBreak, setTodos, currentTask.id, dispatch]);
 
   const startTimer = () => {
     dispatch({ type: TIMER_ACTIONS.START });
@@ -42,7 +65,6 @@ const Pomodoro = ({ currentTask }: PomodoroProps) => {
   const switchMode = () => {
     dispatch({ type: TIMER_ACTIONS.SWITCH_MODE });
   };
-  console.log("current Task" + currentTask.id);
 
   return (
     <div className="pomodoro">
@@ -52,36 +74,34 @@ const Pomodoro = ({ currentTask }: PomodoroProps) => {
           {state.seconds < 10 ? `0${state.seconds}` : state.seconds}
         </p>
       </div>
-      <div>
+      <div className="pomodoro__buttons">
         {state.isActive ? (
           <button
-            className="pomodoro__pauce pomBtn"
             onClick={pauseTimer}
             disabled={!state.isActive}
             aria-label="stop"
           >
-            <FaPause />
+            <FaPause className="icon" />
           </button>
         ) : (
           <button
-            className="pomodoro__start pomBtn"
+            className="pomodoro__start "
             onClick={startTimer}
             disabled={state.isActive}
             aria-label="start"
           >
-            <FaPlay />
+            <FaPlay className="icon" />
           </button>
         )}
         <button
-          className="pomodoro__reset pomBtn"
           onClick={resetTimer}
           disabled={state.isActive}
           aria-label="reset"
         >
-          <GrPowerReset />
+          <GrPowerReset className="icon" />
         </button>
-        <button className="pomodoro__btnMode" onClick={switchMode}>
-          Switch Mode
+        <button>
+          <CiSettings className="icon" />
         </button>
       </div>
     </div>

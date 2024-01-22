@@ -35,12 +35,12 @@ li {
   --check-bgcolor: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
   --disable-color: hsla(0, 0%, 0%, 0.12);
 
-  --background-color: hsl(240, 22%, 96%);
+  --background-color: hsl(240, 3%, 93%);
   --app-Background-color: hsl(0, 0%, 100%);
   --completed-text-color: hsl(0, 0%, 6%);
   --text-color: hsl(235, 19%, 35%);
   --hover-color: hsl(235, 21%, 11%);
-  --boxshadow: rgba(149, 157, 165, 0.2) 0px 8px 14px;
+  --boxshadow: rgba(3, 3, 3, 0.2) 0px 8px 14px;
   --border-color: hsl(252, 11%, 91%);
 }
 
@@ -64,6 +64,20 @@ body {
 main {
   max-width: 540px;
   width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  color: var(--text-color);
+
+  &:hover {
+    color: var(--primary-color);
+  }
 }
 
 .sr-only {
@@ -116,12 +130,15 @@ main {
   }
   &__themebtn {
     cursor: pointer;
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 
   &__dragmessage {
     margin-top: 50px;
     text-align: center;
-    color: var(--text-color2);
+    color: var(--text-color);
     font-size: 0.8rem;
   }
 }
