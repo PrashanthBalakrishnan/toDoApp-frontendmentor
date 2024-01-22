@@ -6,7 +6,7 @@ import { LuSun } from "react-icons/lu";
 
 import { TodoType } from "../utils/types";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import Pomodoro from "./pomodoro/Pomodoro";
+
 interface TodoAppProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
@@ -37,7 +37,6 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
     newTodos.splice(destination.index, 0, reorderedItem);
     return setTodos(newTodos);
   };
-
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <main className="main">
@@ -51,9 +50,9 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
             {isDarkMode ? <LuSun /> : <FaMoon />}
           </button>
         </header>
-        <Pomodoro />
 
         <TodoForm setTodos={setTodos} />
+
         <TodoList setTodos={setTodos} todos={todos} />
         <p className="main__dragmessage">Drag and drop to reorder list</p>
       </main>

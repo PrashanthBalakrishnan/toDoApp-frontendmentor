@@ -1,46 +1,42 @@
 .form {
   box-shadow: var(--boxshadow);
   &__container {
-    position: relative;
-  }
+    display: flex;
+    justify-content: space-between;
 
-  &__input {
     background-color: var(--app-Background-color);
-    padding: 23px 70px;
-    width: 100%;
     border-radius: 10px;
-    outline: none;
-    color: var(--text-color);
+    padding: 10px;
   }
-  &__circle {
-    position: absolute;
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 25px;
-    border: 1px solid var(--border-color);
-  }
-  &__button {
-    position: absolute;
-    z-index: 99;
-    top: 50%;
-    height: 25px;
-    width: 25px;
-    transform: translateY(-50%);
-    right: 25px;
-    transition: all 0.3s ease-in-out;
-    color: var(--text-color);
-    cursor: pointer;
-    &:is(:hover, :focus, :active) {
-      color: var(--primary-color);
-      scale: 1.2;
-    }
 
-    &:disabled {
-      color: var(--disable-color);
-      cursor: not-allowed;
-    }
+  &__inputItems {
+    color: var(--text-color);
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__inputTask {
+    width: 100%;
+    border: none;
+    background-color: var(--app-Background-color);
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.5rem;
+  }
+
+  &__inputPomContainer {
+    margin-top: 10px;
+  }
+
+  &__inputPom {
+    border: none;
+    background-color: var(--app-Background-color);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem;
   }
 }

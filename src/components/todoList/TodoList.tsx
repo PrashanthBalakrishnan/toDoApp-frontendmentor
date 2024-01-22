@@ -1,18 +1,36 @@
-import { useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { TodoType } from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
 import "./todoList.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import Pomodoro from "../pomodoro/Pomodoro";
+
+import {
+  initialState,
+  pomodoroReducer,
+} from "../pomodoroReducer/pomodoroReducer";
 
 interface TodoListProps {
   todos: TodoType[];
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
+const defaultValue = {
+  id: "",
+  title: "No tasks",
+  completed: false,
+  pomodoroCount: 0,
+  totalPomodoro: 0,
+};
 
 const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
-  const [filter, setFilter] = useState("all");
+  const [currentTask, setCurrentTask] = useState<TodoType>(
+    todos[0] || defaultValue
+  );
 
+  const [state, dispatch] = useReducer(pomodoroReducer, initialState);
+
+  const [filter, setFilter] = useState("all");
   function handleClearCompleted() {
     setTodos((currentTodos) => {
       return currentTodos.filter((todo) => !todo.completed);
@@ -28,9 +46,29 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
       return todo.completed;
     }
   });
-
+  useEffect(() => {
+    if (todos.length === 0) {
+      setCurrentTask(defaultValue);
+    }
+    if (currentTask.id === "") {
+      setCurrentTask(todos[0] || defaultValue);
+    }
+  }, [todos, currentTask]);
   return (
     <div className="list">
+      <Pomodoro
+        currentTask={currentTask}
+        setCurrentTask={setCurrentTask}
+        setTodos={setTodos}
+        state={state}
+        dispatch={dispatch}
+      />
+
+      <div className="list__currentTask">
+        Current Task:
+        <span className="list__taskName">{currentTask.title}</span>
+      </div>
+
       <Droppable droppableId="todos">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -44,7 +82,13 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      <TodoItem todo={todo} setTodos={setTodos} todos={todos} />
+                      <TodoItem
+                        todo={todo}
+                        setTodos={setTodos}
+                        todos={todos}
+                        setCurrentTask={setCurrentTask}
+                        dispatch={dispatch}
+                      />
                     </div>
                   )}
                 </Draggable>

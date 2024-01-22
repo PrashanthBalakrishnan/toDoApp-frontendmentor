@@ -1,109 +1,136 @@
-import { useState } from "react";
-import useTimer from "../../hooks/useTimer";
+import { useEffect, useState } from "react";
+
+import { Action, TIMER_ACTIONS, TodoType } from "../../../src/utils/types";
 import "./pomodoro.scss";
+
 import { CiSettings } from "react-icons/ci";
-import { FaPlay, FaPause, FaSave } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
+import { initialState } from "../pomodoroReducer/pomodoroReducer";
+import Settings from "./components/settings/Settings";
 
-const Pomodoro = () => {
-  const [showSettings, setShowSettings] = useState(false);
-  const {
-    isActive,
-    startTimer,
-    pauseTimer,
-    resetTimer,
-    minutes,
-    seconds,
-    workTime,
-    timeOff,
-    setTimeOff,
-    setWorkTime,
-    setMinutes,
-    setSeconds,
-    isWork,
-  } = useTimer();
+interface PomodoroProps {
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
+  currentTask: TodoType;
+  setCurrentTask: React.Dispatch<React.SetStateAction<TodoType>>;
+  state: typeof initialState;
+  dispatch: React.Dispatch<Action>;
+}
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setShowSettings(false);
-    setMinutes(workTime);
-    setSeconds(0);
+const Pomodoro = ({
+  setTodos,
+  currentTask,
+  state,
+  dispatch,
+}: PomodoroProps) => {
+  const [settingOpen, setSettingOpen] = useState(false);
+
+  useEffect(() => {
+    let interval: number | undefined;
+
+    function increasePomodoroCount(id: string) {
+      setTodos((currentTodos) => {
+        return currentTodos.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, pomodoroCount: todo.pomodoroCount + 1 };
+          }
+          return todo;
+        });
+      });
+    }
+
+    if (state.isActive) {
+      interval = setInterval(() => {
+        dispatch({ type: TIMER_ACTIONS.TICK });
+      }, 1000);
+    } else {
+      clearInterval(interval);
+      if (state.isBreak) {
+        increasePomodoroCount(currentTask.id);
+      }
+    }
+
+    return () => clearInterval(interval);
+  }, [state.isActive, state.isBreak, setTodos, currentTask.id, dispatch]);
+
+  const startTimer = () => {
+    dispatch({ type: TIMER_ACTIONS.START });
   };
+
+  const pauseTimer = () => {
+    dispatch({ type: TIMER_ACTIONS.PAUSE });
+  };
+
+  const resetTimer = () => {
+    dispatch({ type: TIMER_ACTIONS.RESET });
+  };
+  console.log(state);
   return (
-    <div className="pomodoro">
-      {showSettings ? (
-        <form className="pomodoro__form" onSubmit={handleSubmit}>
-          <label>Focus: {workTime}:00</label>
-          <input
-            className="pomodoro__input"
-            type="range"
-            min="1"
-            max="60"
-            value={workTime}
-            onChange={(e) => setWorkTime(Number(e.target.value))}
-          />
-          <label>Break: {timeOff}:00</label>
-          <input
-            className="pomodoro__input"
-            type="range"
-            min="1"
-            max="60"
-            value={timeOff}
-            onChange={(e) => setTimeOff(Number(e.target.value))}
-          />
-          <button type="submit" className="pomBtn">
-            <FaSave />
-          </button>
-        </form>
+    <>
+      {settingOpen ? (
+        <Settings
+          dispatch={dispatch}
+          state={state}
+          setSettingOpen={setSettingOpen}
+        />
       ) : (
-        <div>
-          <button
-            className="pomodoro__settings"
-            aria-label="settings"
-            onClick={() => setShowSettings((prev) => !prev)}
-          >
-            <CiSettings />
-          </button>
+        <div className="pomodoro">
           <div className="pomodoro__display">
-            <p className="pomodoro__status">{isWork ? "Focus" : "Break"}</p>
-            <p>
-              {String(minutes).padStart(2, "0")}:
-              {String(seconds).padStart(2, "0")}
+            <p>{state.isBreak ? "Break Time" : "Focus Time"}</p>
+            <p className="pomodoro__time">
+              {state.isBreak ? state.breakMinutes : state.focusMinutes}:
+              {state.seconds < 10 ? `0${state.seconds}` : state.seconds}
             </p>
           </div>
           <div className="pomodoro__buttons">
-            {isActive ? (
-              <button
-                className="pomodoro__pauce pomBtn"
-                onClick={pauseTimer}
-                disabled={!isActive}
-                aria-label="stop"
-              >
-                <FaPause />
-              </button>
+            {state.isActive ? (
+              <div className="pomodoro__pauseContainer">
+                <button
+                  onClick={pauseTimer}
+                  disabled={!state.isActive}
+                  aria-label="stop"
+                >
+                  <FaPause className="icon" />
+                </button>
+                <span>Pause Timer</span>
+              </div>
             ) : (
-              <button
-                className="pomodoro__start pomBtn"
-                onClick={startTimer}
-                disabled={isActive}
-                aria-label="start"
-              >
-                <FaPlay />
-              </button>
+              <div className="pomodoro__startContainer">
+                <button
+                  className="pomodoro__start "
+                  onClick={startTimer}
+                  disabled={state.isActive}
+                  aria-label="start"
+                >
+                  <FaPlay className="icon" />
+                </button>
+                <span>Start Timer</span>
+              </div>
             )}
+            <div className="pomodoro__resetContainer">
+              <button
+                onClick={resetTimer}
+                disabled={state.isActive}
+                aria-label="reset"
+              >
+                <GrPowerReset className="icon" />
+              </button>
+              <span>Reset Timer</span>
+            </div>
 
-            <button
-              className="pomodoro__reset pomBtn"
-              onClick={resetTimer}
-              disabled={isActive}
-              aria-label="reset"
-            >
-              <GrPowerReset />
-            </button>
+            <div className="pomodoro__settingsContainer">
+              <button
+                aria-label="settings"
+                onClick={() => setSettingOpen(true)}
+              >
+                <CiSettings className="icon" />
+              </button>
+              <span>Settings</span>
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 export default Pomodoro;

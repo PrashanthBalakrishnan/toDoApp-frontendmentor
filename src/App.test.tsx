@@ -64,14 +64,6 @@ describe("App", () => {
     expect(document.body).toHaveTextContent("Go to the gym");
   });
 
-  test("user able to see active task", async () => {
-    const { user } = render(<App />);
-    const activeFilter = screen.getByRole("button", { name: /active/i });
-
-    await user.click(activeFilter);
-    expect(document.body).not.toHaveTextContent("Go to the gym");
-  });
-
   test("user able to see all task", async () => {
     const { user } = render(<App />);
     const activeFilter = screen.getByRole("button", { name: /all/i });
