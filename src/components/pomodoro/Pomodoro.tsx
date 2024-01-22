@@ -64,7 +64,6 @@ const Pomodoro = ({
   const resetTimer = () => {
     dispatch({ type: TIMER_ACTIONS.RESET });
   };
-  console.log(state);
   return (
     <>
       {settingOpen ? (
