@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Action, TIMER_ACTIONS } from "../../../../utils/types";
 import "./settings.scss";
 import { initialState } from "../../../pomodoroReducer/pomodoroReducer";
-import { FaSave } from "react-icons/fa";
 
 interface SettingsProps {
   dispatch: React.Dispatch<Action>;
@@ -32,6 +31,12 @@ const Settings = ({ dispatch, state, setSettingOpen }: SettingsProps) => {
     });
     setSettingOpen(false);
   }
+
+  function resetSettings() {
+    setFocusTime(45);
+    setBreakTime(15);
+    state.seconds = 0;
+  }
   return (
     <form onSubmit={handleSubmit} className="settings">
       <label>
@@ -54,11 +59,15 @@ const Settings = ({ dispatch, state, setSettingOpen }: SettingsProps) => {
           onChange={(e) => setBreakTime(e.target.valueAsNumber)}
         />
       </label>
-      <div className="settings__saveContainer">
-        <button aria-label="save settings">
-          <FaSave className="icon" />
+      <div className="settings__buttons">
+        <button
+          className="settings__reset"
+          type="button"
+          onClick={resetSettings}
+        >
+          Reset Settings
         </button>
-        <span>Save Settings</span>
+        <button className="settings__save">Save Settings</button>
       </div>
     </form>
   );

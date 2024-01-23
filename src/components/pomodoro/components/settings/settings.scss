@@ -15,29 +15,40 @@
     margin-left: 1rem;
   }
 
-  &__saveContainer {
-    position: relative;
-    display: inline-block;
+  &__buttons {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-    span {
-      visibility: hidden;
-      width: 80px;
-      background-color: rgba(0, 0, 0, 0.474);
-      color: #fff;
-      text-align: center;
-      padding: 5px 0;
-      border-radius: 6px;
-      position: absolute;
-      z-index: 1;
-      top: 100%;
-      left: 50%;
-      margin-left: -60px;
-      font-size: 0.8rem;
+  &__save {
+    background-color: var(--primary-color);
+    color: var(--border-color);
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.2rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+      color: var(--border-color);
     }
   }
 
-  &__saveContainer:hover span {
-    visibility: visible;
-    transition-delay: 1s;
+  &__reset {
+    color: var(--text-color);
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.2rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--completed-text-color);
+    color: var(--border-color);
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
