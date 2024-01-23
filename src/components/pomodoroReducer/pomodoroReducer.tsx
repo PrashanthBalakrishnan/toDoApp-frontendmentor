@@ -26,7 +26,7 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
         isActive: false,
       };
     case TIMER_ACTIONS.RESET: {
-      return { ...initialState };
+      return { ...state };
     }
 
     case TIMER_ACTIONS.SET_FOCUS: {
@@ -42,7 +42,7 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
           if (state.focusMinutes === 0) {
             playAlarm();
             return {
-              ...initialState,
+              ...state,
               isBreak: !state.isBreak,
             };
           } else {
@@ -60,7 +60,7 @@ export const pomodoroReducer = (state: PomodoroState, action: Action) => {
           if (state.breakMinutes === 0) {
             playAlarm();
             return {
-              ...initialState,
+              ...state,
               isBreak: !state.isBreak,
             };
           } else {

@@ -28,7 +28,11 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
     todos[0] || defaultValue
   );
 
-  const [state, dispatch] = useReducer(pomodoroReducer, initialState);
+  const [state, dispatch] = useReducer(pomodoroReducer, initialState, () => {
+    const localValue = localStorage.getItem("pomoState");
+    if (localValue === null) return initialState;
+    return JSON.parse(localValue);
+  });
 
   const [filter, setFilter] = useState("all");
   function handleClearCompleted() {
@@ -53,7 +57,9 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
     if (currentTask.id === "") {
       setCurrentTask(todos[0] || defaultValue);
     }
-  }, [todos, currentTask]);
+
+    localStorage.setItem("pomoState", JSON.stringify(state));
+  }, [todos, currentTask, state]);
   return (
     <div className="list">
       <Pomodoro

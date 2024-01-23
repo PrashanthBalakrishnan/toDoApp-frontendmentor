@@ -77,33 +77,6 @@
     transition-delay: 1s;
   }
 
-  // Reset button
-
-  &__resetContainer {
-    position: relative;
-    display: inline-block;
-
-    span {
-      visibility: hidden;
-      width: 80px;
-      background-color: rgba(0, 0, 0, 0.474);
-      color: #fff;
-      text-align: center;
-      padding: 5px 0;
-      border-radius: 6px;
-      position: absolute;
-      z-index: 1;
-      top: 100%;
-      left: 50%;
-      font-size: 0.8rem;
-    }
-  }
-
-  &__resetContainer:hover span {
-    visibility: visible;
-    transition-delay: 1s;
-  }
-
   // Settings button
 
   &__settingsContainer {

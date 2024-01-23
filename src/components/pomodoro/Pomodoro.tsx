@@ -5,7 +5,6 @@ import "./pomodoro.scss";
 
 import { CiSettings } from "react-icons/ci";
 import { FaPlay, FaPause } from "react-icons/fa";
-import { GrPowerReset } from "react-icons/gr";
 import { initialState } from "../pomodoroReducer/pomodoroReducer";
 import Settings from "./components/settings/Settings";
 
@@ -61,9 +60,6 @@ const Pomodoro = ({
     dispatch({ type: TIMER_ACTIONS.PAUSE });
   };
 
-  const resetTimer = () => {
-    dispatch({ type: TIMER_ACTIONS.RESET });
-  };
   return (
     <>
       {settingOpen ? (
@@ -106,16 +102,6 @@ const Pomodoro = ({
                 <span>Start Timer</span>
               </div>
             )}
-            <div className="pomodoro__resetContainer">
-              <button
-                onClick={resetTimer}
-                disabled={state.isActive}
-                aria-label="reset"
-              >
-                <GrPowerReset className="icon" />
-              </button>
-              <span>Reset Timer</span>
-            </div>
 
             <div className="pomodoro__settingsContainer">
               <button
