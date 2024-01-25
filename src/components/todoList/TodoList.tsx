@@ -1,15 +1,16 @@
 import { useEffect, useReducer, useState } from "react";
-import { TodoType } from "../../utils/types";
+import {
+  Action,
+  PomodoroState,
+  TIMER_ACTIONS,
+  TodoType,
+} from "../../utils/types";
 import TodoFilter from "../todoFilter/TodoFilter";
 import TodoItem from "../todoItem/TodoItem";
 import "./todoList.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Pomodoro from "../pomodoro/Pomodoro";
-
-import {
-  initialState,
-  pomodoroReducer,
-} from "../pomodoroReducer/pomodoroReducer";
+import alarm from "../../assets/alarmsound.mp3";
 
 interface TodoListProps {
   todos: TodoType[];
@@ -23,10 +24,106 @@ const defaultValue = {
   totalPomodoro: 0,
 };
 
+function playAlarm() {
+  new Audio(alarm).play();
+}
+
 const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
   const [currentTask, setCurrentTask] = useState<TodoType>(
     todos[0] || defaultValue
   );
+
+  function increasePomodoroCount(id: string) {
+    setTodos((currentTodos) => {
+      return currentTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, pomodoroCount: todo.pomodoroCount + 1 };
+        }
+        return todo;
+      });
+    });
+  }
+
+  const initialState: PomodoroState = {
+    focusMinutes: 45,
+    breakMinutes: 15,
+    seconds: 0,
+    isActive: false,
+    isBreak: false,
+  };
+
+  const pomodoroReducer = (state: PomodoroState, action: Action) => {
+    switch (action.type) {
+      case TIMER_ACTIONS.START:
+        return {
+          ...state,
+          isActive: true,
+        };
+      case TIMER_ACTIONS.PAUSE:
+        return {
+          ...state,
+          isActive: false,
+        };
+      case TIMER_ACTIONS.RESET: {
+        return { ...state };
+      }
+
+      case TIMER_ACTIONS.SET_FOCUS: {
+        return { ...state, focusMinutes: action.payload?.minutes };
+      }
+
+      case TIMER_ACTIONS.SET_BREAK: {
+        return { ...state, breakMinutes: action.payload?.minutes };
+      }
+      case TIMER_ACTIONS.TICK: {
+        if (!state.isBreak) {
+          if (state.seconds === 0) {
+            if (state.focusMinutes === 0) {
+              playAlarm();
+              increasePomodoroCount(currentTask.id);
+              return {
+                ...initialState,
+                isBreak: !state.isBreak,
+              };
+            } else {
+              return {
+                ...state,
+                focusMinutes: (state.focusMinutes ?? 0) - 1,
+                seconds: 59,
+              };
+            }
+          } else {
+            return { ...state, seconds: state.seconds - 1 };
+          }
+        } else {
+          if (state.seconds === 0) {
+            if (state.breakMinutes === 0) {
+              playAlarm();
+              return {
+                ...initialState,
+                isBreak: !state.isBreak,
+              };
+            } else {
+              return {
+                ...state,
+                breakMinutes: (state.breakMinutes ?? 0) - 1,
+                seconds: 59,
+              };
+            }
+          } else {
+            return { ...state, seconds: state.seconds - 1 };
+          }
+        }
+      }
+
+      case TIMER_ACTIONS.TAKE_BREAK: {
+        return { ...state, isBreak: true };
+      }
+
+      default:
+        return state;
+    }
+  };
 
   const [state, dispatch] = useReducer(pomodoroReducer, initialState, () => {
     const localValue = localStorage.getItem("pomoState");
