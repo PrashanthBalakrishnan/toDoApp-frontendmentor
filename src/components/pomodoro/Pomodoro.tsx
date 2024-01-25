@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 
-import { Action, TIMER_ACTIONS, TodoType } from "../../../src/utils/types";
+import {
+  Action,
+  PomodoroState,
+  TIMER_ACTIONS,
+  TodoType,
+} from "../../../src/utils/types";
 import "./pomodoro.scss";
 
 import { CiSettings } from "react-icons/ci";
 import { FaPlay, FaPause } from "react-icons/fa";
-import { initialState } from "../pomodoroReducer/pomodoroReducer";
 import Settings from "./components/settings/Settings";
 
 interface PomodoroProps {
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   currentTask: TodoType;
   setCurrentTask: React.Dispatch<React.SetStateAction<TodoType>>;
-  state: typeof initialState;
+  state: PomodoroState;
   dispatch: React.Dispatch<Action>;
 }
 
@@ -27,26 +31,12 @@ const Pomodoro = ({
   useEffect(() => {
     let interval: number | undefined;
 
-    function increasePomodoroCount(id: string) {
-      setTodos((currentTodos) => {
-        return currentTodos.map((todo) => {
-          if (todo.id === id) {
-            return { ...todo, pomodoroCount: todo.pomodoroCount + 1 };
-          }
-          return todo;
-        });
-      });
-    }
-
     if (state.isActive) {
       interval = setInterval(() => {
         dispatch({ type: TIMER_ACTIONS.TICK });
-      }, 1000);
+      }, 1);
     } else {
       clearInterval(interval);
-      if (state.isBreak) {
-        increasePomodoroCount(currentTask.id);
-      }
     }
 
     return () => clearInterval(interval);
@@ -78,6 +68,12 @@ const Pomodoro = ({
             </p>
           </div>
           <div className="pomodoro__buttons">
+            <button
+              type="button"
+              onClick={() => dispatch({ type: TIMER_ACTIONS.TAKE_BREAK })}
+            >
+              Take a break
+            </button>
             {state.isActive ? (
               <div className="pomodoro__pauseContainer">
                 <button
