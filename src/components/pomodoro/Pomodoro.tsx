@@ -34,7 +34,7 @@ const Pomodoro = ({
     if (state.isActive) {
       interval = setInterval(() => {
         dispatch({ type: TIMER_ACTIONS.TICK });
-      }, 1);
+      }, 1000);
     } else {
       clearInterval(interval);
     }
