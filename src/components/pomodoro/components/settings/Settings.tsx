@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Action, TIMER_ACTIONS } from "../../../../utils/types";
+import { PomodoroState } from "../../../../utils/types";
+
 import "./settings.scss";
-import { initialState } from "../../../pomodoroReducer/pomodoroReducer";
 
 interface SettingsProps {
   dispatch: React.Dispatch<Action>;
-  state: typeof initialState;
+  state: PomodoroState;
   setSettingOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
