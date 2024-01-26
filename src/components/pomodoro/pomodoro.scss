@@ -13,6 +13,21 @@
     font-size: 4rem;
   }
 
+  &__breakBtn {
+    color: var(--text-color);
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--completed-text-color);
+    color: var(--border-color);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
   &__buttons {
     display: flex;
     align-items: center;

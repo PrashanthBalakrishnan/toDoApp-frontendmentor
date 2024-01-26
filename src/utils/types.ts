@@ -15,7 +15,7 @@ export enum TIMER_ACTIONS {
   TICK = "TICK",
   SET_FOCUS = "SET_FOCUS",
   SET_BREAK = "SET_BREAK",
-  TAKE_BREAK = "TAKE_BREAK",
+  SWITCH_MODE = "SWITCH_MODE",
 }
 export interface PomodoroState {
   focusMinutes: number | undefined;

@@ -69,10 +69,11 @@ const Pomodoro = ({
           </div>
           <div className="pomodoro__buttons">
             <button
+              className="pomodoro__breakBtn"
               type="button"
-              onClick={() => dispatch({ type: TIMER_ACTIONS.TAKE_BREAK })}
+              onClick={() => dispatch({ type: TIMER_ACTIONS.SWITCH_MODE })}
             >
-              Take a break
+              {state.isBreak ? "Switch to Focus" : "Take a Break"}
             </button>
             {state.isActive ? (
               <div className="pomodoro__pauseContainer">

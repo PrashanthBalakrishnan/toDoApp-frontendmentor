@@ -116,8 +116,11 @@ const TodoList: React.FC<TodoListProps> = ({ setTodos, todos }) => {
         }
       }
 
-      case TIMER_ACTIONS.TAKE_BREAK: {
-        return { ...state, isBreak: true };
+      case TIMER_ACTIONS.SWITCH_MODE: {
+        return {
+          ...state,
+          isBreak: !state.isBreak,
+        };
       }
 
       default:
