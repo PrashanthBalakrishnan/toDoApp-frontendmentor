@@ -62,9 +62,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
           </div>
         </div>
         <button
-          className="form__button"
+          className="form__submitButton"
           type="submit"
-          aria-label="submit"
           data-testid="submit-button"
           disabled={!newItem.trim()}
         >

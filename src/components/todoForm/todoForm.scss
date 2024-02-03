@@ -20,7 +20,6 @@
   &__inputTask {
     width: 100%;
     border: none;
-    background-color: var(--app-Background-color);
     color: var(--text-color);
     font-size: 1.5rem;
     font-weight: 500;
@@ -33,10 +32,15 @@
 
   &__inputPom {
     border: none;
-    background-color: var(--app-Background-color);
     color: var(--text-color);
     font-size: 1.1rem;
     font-weight: 500;
     padding: 0.5rem;
+  }
+
+  &__submitButton {
+    &:focus {
+      border: 1px solid var(--primary-color);
+    }
   }
 }
