@@ -118,7 +118,7 @@ button {
   &__header {
     display: flex;
     justify-content: space-between;
-    color: white;
+    color: var(--primary-color);
     margin-bottom: 1rem;
   }
   &__logo {

@@ -2,7 +2,7 @@
   background-color: var(--app-Background-color);
   margin-top: 1rem;
   border-radius: 10px;
-
+  box-shadow: var(--boxshadow);
   &__currentTask {
     padding: 10px 20px;
     color: var(--text-color);
