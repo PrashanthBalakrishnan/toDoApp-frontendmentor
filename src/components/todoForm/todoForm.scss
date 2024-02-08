@@ -1,10 +1,11 @@
 .form {
   box-shadow: var(--boxshadow);
+
   &__container {
     display: flex;
     justify-content: space-between;
+    background: var(--app-Background-color);
 
-    background-color: var(--app-Background-color);
     border-radius: 10px;
     padding: 10px;
   }
