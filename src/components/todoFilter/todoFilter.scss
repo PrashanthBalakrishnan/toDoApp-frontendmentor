@@ -6,6 +6,10 @@
   &:hover {
     color: var(--primary-color);
   }
+  &:focus {
+    outline: 1px solid var(--primary-color);
+    padding: 2px;
+  }
 }
 .selected {
   color: var(--primary-color);

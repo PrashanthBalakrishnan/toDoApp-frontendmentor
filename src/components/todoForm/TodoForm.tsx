@@ -66,6 +66,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ setTodos }) => {
           type="submit"
           data-testid="submit-button"
           disabled={!newItem.trim()}
+          aria-label="add task"
         >
           <AiOutlineRight className="icon" />
         </button>
