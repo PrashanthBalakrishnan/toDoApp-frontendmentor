@@ -27,6 +27,10 @@
     &:hover {
       opacity: 0.8;
     }
+    &:focus {
+      background-color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+    }
   }
 
   &__buttons {
@@ -38,6 +42,16 @@
   }
 
   // Start Button
+
+  &__start {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    &:focus {
+      background-color: var(--primary-color);
+    }
+  }
 
   &__startContainer {
     position: relative;
@@ -67,6 +81,16 @@
 
   // Pause button
 
+  &__pause {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    &:focus {
+      background-color: var(--primary-color);
+    }
+  }
+
   &__pauseContainer {
     position: relative;
     display: inline-block;
@@ -94,6 +118,15 @@
   }
 
   // Settings button
+  &__settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    &:focus {
+      background-color: var(--primary-color);
+    }
+  }
 
   &__settingsContainer {
     position: relative;

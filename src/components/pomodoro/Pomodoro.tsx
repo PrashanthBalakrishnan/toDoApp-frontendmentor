@@ -78,6 +78,7 @@ const Pomodoro = ({
             {state.isActive ? (
               <div className="pomodoro__pauseContainer">
                 <button
+                  className="pomodoro__pause"
                   onClick={pauseTimer}
                   disabled={!state.isActive}
                   aria-label="stop"
@@ -102,6 +103,7 @@ const Pomodoro = ({
 
             <div className="pomodoro__settingsContainer">
               <button
+                className="pomodoro__settings"
                 aria-label="settings"
                 onClick={() => setSettingOpen(true)}
               >
