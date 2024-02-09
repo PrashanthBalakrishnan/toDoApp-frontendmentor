@@ -11,6 +11,9 @@
   &__button {
     cursor: pointer;
     margin-left: 10px;
+    &:focus {
+      border: 1px solid var(--primary-color);
+    }
   }
 }
 
