@@ -45,10 +45,18 @@ const todosSlice = createSlice({
         };
       },
     },
+    editTodo: (state, action: PayloadAction<Itodo>) => {
+      const { id, todo, pomodoroCount } = action.payload;
+      const existingTodo = state.find((todo) => todo.id === id);
+      if (existingTodo) {
+        existingTodo.todo = todo;
+        existingTodo.pomodoroCount = pomodoroCount;
+      }
+    },
   },
 });
 
 export const selectAllTodos = (state: { todos: Itodo[] }) => state.todos;
 
-export const { addTodo, deleteTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, editTodo } = todosSlice.actions;
 export default todosSlice.reducer;
