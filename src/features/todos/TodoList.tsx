@@ -18,7 +18,9 @@ const TodoList = () => {
     <div className="todo" key={todo.id}>
       <div className="todo__container">
         <p className="todo__item">{todo.todo}</p>
-        <p className="todo__pomodoroCount">{todo.pomodoroCount}</p>
+        <p className="todo__pomodoroCount">
+          {todo.currentPomCount}/{todo.totalPomCount}
+        </p>
         <div className="todo__moreBtn">
           <button
             className="todo__delete"
@@ -31,9 +33,11 @@ const TodoList = () => {
       </div>
       {openSettingsId === todo.id && (
         <TodoEditForm
+          handleToggleSettings={handleToggleSettings}
           id={todo.id}
           todo={todo.todo}
-          pomodoroCount={todo.pomodoroCount}
+          totalPomCount={todo.totalPomCount}
+          currentPomCount={todo.currentPomCount}
           completed={todo.completed}
         />
       )}

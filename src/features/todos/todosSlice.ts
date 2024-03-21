@@ -3,7 +3,8 @@ import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 export interface Itodo {
   id: string;
   todo: string;
-  pomodoroCount: number;
+  totalPomCount: number;
+  currentPomCount: number;
   completed: boolean;
 }
 
@@ -11,7 +12,8 @@ const initialState: Itodo[] = [
   {
     id: "1",
     todo: "Complete AWS course",
-    pomodoroCount: 1,
+    currentPomCount: 0,
+    totalPomCount: 4,
     completed: false,
   },
 ];
@@ -29,7 +31,8 @@ const todosSlice = createSlice({
           payload: {
             id: nanoid(),
             todo: todo,
-            pomodoroCount: pomodoroCount,
+            currentPomCount: 0,
+            totalPomCount: pomodoroCount,
             completed: false,
           },
         };
@@ -45,13 +48,33 @@ const todosSlice = createSlice({
         };
       },
     },
-    editTodo: (state, action: PayloadAction<Itodo>) => {
-      const { id, todo, pomodoroCount } = action.payload;
-      const existingTodo = state.find((todo) => todo.id === id);
-      if (existingTodo) {
-        existingTodo.todo = todo;
-        existingTodo.pomodoroCount = pomodoroCount;
-      }
+    editTodo: {
+      reducer: (state, action: PayloadAction<Itodo>) => {
+        const { id, todo, totalPomCount, completed } = action.payload;
+        const existingTodo = state.find((todo) => todo.id === id);
+        if (existingTodo) {
+          existingTodo.todo = todo;
+          existingTodo.totalPomCount = totalPomCount;
+          existingTodo.completed = completed;
+        }
+      },
+      prepare: (
+        id: string,
+        todo: string,
+        currentPomCount: number,
+        totalPomCount: number,
+        completed: boolean
+      ) => {
+        return {
+          payload: {
+            id,
+            todo,
+            currentPomCount,
+            totalPomCount,
+            completed,
+          },
+        };
+      },
     },
   },
 });
