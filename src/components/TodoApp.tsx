@@ -3,6 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import { LuSun } from "react-icons/lu";
 import TodoList from "../features/todos/TodoList";
 import "../features/todos/todoStyles.scss";
+import Pomodoro from "../features/pomodoro/Pomodoro";
 
 interface TodoAppProps {
   toggleDarkMode: () => void;
@@ -22,7 +23,7 @@ const TodoApp: React.FC<TodoAppProps> = ({ toggleDarkMode, isDarkMode }) => {
           {isDarkMode ? <LuSun /> : <FaMoon />}
         </button>
       </header>
-
+      <Pomodoro />
       <TodoForm />
       <TodoList />
 

@@ -76,10 +76,24 @@ const todosSlice = createSlice({
         };
       },
     },
+    increasePomCount: {
+      reducer: (state, action: PayloadAction<string>) => {
+        const existingTodo = state.find((todo) => todo.id === action.payload);
+        if (existingTodo) {
+          existingTodo.currentPomCount += 1;
+        }
+      },
+      prepare: (id: string) => {
+        return {
+          payload: id,
+        };
+      },
+    },
   },
 });
 
 export const selectAllTodos = (state: { todos: Itodo[] }) => state.todos;
 
-export const { addTodo, deleteTodo, editTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, editTodo, increasePomCount } =
+  todosSlice.actions;
 export default todosSlice.reducer;
