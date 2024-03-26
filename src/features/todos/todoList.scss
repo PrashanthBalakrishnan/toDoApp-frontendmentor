@@ -1,0 +1,37 @@
+// Todo Form
+
+// Todo List
+.todo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  &__container {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    width: 100%;
+  }
+
+  &__pomodoroCount {
+    margin-left: auto;
+  }
+  &__delete {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--hover-color);
+    }
+    &:focus,
+    :active {
+      background-color: var(--hover-color);
+    }
+  }
+}
+
+// Todo Edit Form

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Itodo, deleteTodo, editTodo } from "./todosSlice";
+import { Itodo, deleteTodo, editTodo } from "../../todosSlice";
 import { useDispatch } from "react-redux";
+import "./todoEditForm.scss";
 
 interface HandleToggleSettingsProp {
   handleToggleSettings: (id: string) => void;

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { addTodo } from "./todosSlice";
+import { addTodo } from "../../todosSlice";
+import "./todoForm.scss";
+
 const TodoForm = () => {
   const [newItem, setNewItem] = useState("");
   const [pomodoro, setPomodoro] = useState(1);

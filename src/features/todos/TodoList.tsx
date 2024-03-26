@@ -2,7 +2,9 @@ import { useSelector } from "react-redux";
 import { Itodo, selectAllTodos } from "./todosSlice";
 import { IoMdMore } from "react-icons/io";
 import { useState } from "react";
-import TodoEditForm from "./TodoEditForm";
+import TodoEditForm from "./components/TodoEditForm/TodoEditForm";
+
+import "./todoList.scss";
 
 const TodoList = () => {
   const [openSettingsId, setOpenSettingsId] = useState<string | null>(null);

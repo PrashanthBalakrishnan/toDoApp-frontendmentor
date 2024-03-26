@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  minutes: 25,
+  FocusMinutes: 1,
   seconds: 0,
   isRunning: false,
   isPaused: false,
@@ -9,11 +9,12 @@ const initialState = {
 };
 
 export interface IPomodoro {
-  minutes: number;
+  FocusMinutes: number;
   seconds: number;
   isRunning: boolean;
   isPaused: boolean;
   isCompleted: boolean;
+  status: "Focus" | "Short Break" | "Long Break";
 }
 
 const pomodoroSlice = createSlice({
@@ -26,9 +27,7 @@ const pomodoroSlice = createSlice({
       },
       prepare() {
         return {
-          payload: {
-            isRunning: true,
-          },
+          payload: {},
         };
       },
     },
@@ -56,14 +55,14 @@ const pomodoroSlice = createSlice({
     },
     resetTimer: {
       reducer: (state) => {
-        state.minutes = 25;
+        state.FocusMinutes = 25;
         state.seconds = 0;
         state.isRunning = false;
         state.isPaused = false;
         state.isCompleted = false;
       },
       prepare(
-        minutes: number,
+        FocusMinutes: number,
         seconds: number,
         isRunning: boolean,
         isPaused: boolean,
@@ -71,7 +70,7 @@ const pomodoroSlice = createSlice({
       ) {
         return {
           payload: {
-            minutes,
+            FocusMinutes,
             seconds,
             isRunning,
             isPaused,
@@ -98,8 +97,8 @@ const pomodoroSlice = createSlice({
       reducer: (state) => {
         if (state.seconds > 0) {
           state.seconds -= 1;
-        } else if (state.minutes > 0) {
-          state.minutes -= 1;
+        } else if (state.FocusMinutes > 0) {
+          state.FocusMinutes -= 1;
           state.seconds = 59;
         } else {
           state.isRunning = false;
@@ -115,15 +114,15 @@ const pomodoroSlice = createSlice({
     setTimer: {
       reducer: (
         state,
-        action: PayloadAction<{ minutes: number; seconds: number }>
+        action: PayloadAction<{ FocusMinutes: number; seconds: number }>
       ) => {
-        state.minutes = action.payload.minutes;
+        state.FocusMinutes = action.payload.FocusMinutes;
         state.seconds = action.payload.seconds;
       },
-      prepare(minutes: number, seconds: number) {
+      prepare(FocusMinutes: number, seconds: number) {
         return {
           payload: {
-            minutes,
+            FocusMinutes,
             seconds,
           },
         };

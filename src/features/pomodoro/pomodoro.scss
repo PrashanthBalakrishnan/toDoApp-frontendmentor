@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
+.pomodoro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto Flex", sans-serif;
+  position: relative;
+  &__status {
+    font-size: rem;
+    margin-top: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 2rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  &__timer {
+    font-size: 4rem;
+    margin-top: 1rem;
+    font-weight: 200;
+  }
+
+  //ACTION BUTTONS STYLES
+
+  &__actionBtns {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__settingBtn {
+    display: flex;
+    font-size: 1rem;
+    padding: 1.2rem;
+    border-radius: 1rem;
+    background-color: var(--secondary-color);
+
+    &:hover {
+      background-color: var(--hover-color);
+      cursor: pointer;
+    }
+    &:focus {
+      background-color: var(--hover-color);
+    }
+  }
+
+  &__startBtn,
+  &__stopBtn {
+    display: flex;
+    font-size: 1rem;
+    padding: 1.2rem 2rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--hover-color);
+    }
+    &:focus {
+      background-color: var(--hover-color);
+    }
+  }
+}

@@ -1,6 +1,10 @@
 import { Toaster } from "react-hot-toast";
-import TodoApp from "./components/TodoApp";
 import { useState, useEffect } from "react";
+import { LuSun } from "react-icons/lu";
+import { FaMoon } from "react-icons/fa";
+import TodoForm from "./features/todos/components/TodoForm/TodoForm";
+import TodoList from "./features/todos/TodoList";
+import Pomodoro from "./features/pomodoro/Pomodoro";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -30,7 +34,25 @@ const App = () => {
   return (
     <div className={isDarkMode ? "app-Dark" : "app"}>
       <Toaster />
-      <TodoApp isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <main className="main">
+        <header className="main__header">
+          <h1 className="main__logo">Taskify</h1>
+          <button
+            onClick={toggleDarkMode}
+            className="main__themebtn"
+            aria-label="Theme switcher"
+          >
+            {isDarkMode ? <LuSun /> : <FaMoon />}
+          </button>
+        </header>
+        <Pomodoro />
+        <TodoForm />
+        <TodoList />
+
+        <small className="main__dragmessage">
+          Drag and drop to reorder list
+        </small>
+      </main>
     </div>
   );
 };
